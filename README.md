@@ -12,7 +12,13 @@ One command to set up your entire dev environment with package managers, dotfile
 
 ## 🚀 Quick Start
 
-### Universal (Auto-detects OS)
+### One-Line Install (Easiest)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
+```
+
+### Standard Install
 
 ```bash
 # Clone this repo
@@ -22,6 +28,14 @@ cd ~/dev-setup
 # Run the universal bootstrap
 chmod +x bootstrap.sh
 ./bootstrap.sh
+```
+
+### Using Make (If Available)
+
+```bash
+make install        # Standard installation
+make install-min    # Minimal installation
+make install-full   # Full installation
 ```
 
 ### Platform-Specific
@@ -51,6 +65,43 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 ```
 
 **That's it!** ☕ Grab some coffee while it installs everything (~10-20 minutes).
+
+---
+
+## ⚡ New Features
+
+### Installation Modes
+```bash
+./bootstrap.sh --minimal    # Essentials only
+./bootstrap.sh --standard   # Recommended (default)
+./bootstrap.sh --full       # Everything
+```
+
+### Dry Run
+```bash
+./bootstrap.sh --dry-run    # Preview without installing
+```
+
+### Config File Support
+Saves your preferences to `~/.dev-setup-config` for faster re-runs:
+```bash
+./bootstrap.sh --use-config  # Skip prompts
+```
+
+### Easy Updates
+```bash
+./update.sh                 # Update everything
+make update                 # Or use make
+```
+
+### Quick Commands
+```bash
+make help                   # Show all commands
+make check                  # Check package status
+make test                   # Test scripts
+```
+
+📖 **See [USAGE.md](USAGE.md) for complete guide**
 
 ## 📦 What Gets Installed
 
