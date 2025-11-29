@@ -19,14 +19,17 @@ chmod +x bootstrap.sh
 Or use the universal launcher from the root:
 
 ```bash
-./bootstrap.sh  # Auto-detects macOS
+./lib/bootstrap.sh  # Auto-detects macOS and prompts for package selection
 ```
 
 **You'll be prompted for:**
 
+- **Package selection** - Choose which packages to install (interactive/preset/all)
 - Git name and email
 - Dotfiles repository URL (optional - for cloning)
 - Dotfiles directory path (can be local or clone destination)
+
+💡 **Tip:** Run `make select` first to choose packages, then run `make install`
 
 ## Brewfile
 

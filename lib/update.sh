@@ -155,6 +155,9 @@ main() {
   echo ""
   success "✅ All updates complete!"
   echo ""
+  log "💡 Tip: Run 'make select' to modify your package selection"
+  log "💡 Tip: Run 'make install' to install newly selected packages"
+  echo ""
 }
 
 main "$@"

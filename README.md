@@ -20,7 +20,13 @@ One command to install everything: package managers, development tools, applicat
 curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
 ```
 
-**That's it!** ☕ Grab coffee while it installs (~15-20 minutes).
+**That's it!** The installer will:
+
+1. 🎯 Ask which packages you want to install
+2. 📦 Show you interactive options (minimal/developer/full presets)
+3. ⚡ Install only what you chose (~5-25 minutes depending on selection)
+
+☕ Grab coffee while it installs!
 
 ---
 
@@ -31,30 +37,35 @@ curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh 
 git clone <your-repo-url> ~/dev-setup
 cd ~/dev-setup
 
-# Choose packages (optional)
+# Choose packages (recommended)
 make select
 
 # Install
 make install
 ```
 
+💡 **First-time users**: The installer will automatically prompt you to select packages if you haven't already!
+
 ---
 
 ### Method 3: Platform-Specific
 
 **macOS:**
+
 ```bash
 cd ~/dev-setup/platforms/macos
 ./bootstrap.sh
 ```
 
 **Linux:**
+
 ```bash
 cd ~/dev-setup/platforms/linux
 ./bootstrap.sh
 ```
 
 **Windows (PowerShell as Administrator):**
+
 ```powershell
 cd ~/dev-setup/platforms/windows
 .\bootstrap.ps1
@@ -102,22 +113,33 @@ cd ~/dev-setup/platforms/windows
 
 ## 🎯 Features
 
-### 🎨 Interactive Package Selection
+### 🎨 Interactive Package Selection ⭐ NEW
 
-Choose exactly what you want to install:
+The installer **automatically prompts you** to choose packages on first run!
+
+**Three ways to select:**
+
+1. **Interactive** - Choose each category (recommended for beginners)
+2. **Preset** - Quick selection:
+   - Minimal (essentials only, ~5 min)
+   - Developer (recommended, ~15 min)
+   - Full (everything, ~25 min)
+3. **Install all** - Not recommended (installs everything)
 
 ```bash
-make select                        # Interactive menu
-./lib/select-packages.sh --minimal     # Essentials only
-./lib/select-packages.sh --developer   # Recommended
-./lib/select-packages.sh --full        # Everything
+# Or select before running install:
+make select                             # Interactive menu
+./lib/select-packages.sh --minimal      # Essentials only
+./lib/select-packages.sh --developer    # Recommended
+./lib/select-packages.sh --full         # Everything
 ```
 
 **Package categories:**
-- Essential tools, Programming languages
-- Development tools, Browsers, Editors  
-- Communication, Productivity, Media
-- Window managers, Fonts, Zsh plugins
+
+- ✅ Essential tools, Programming languages
+- ✅ Development tools, Browsers, Editors  
+- ✅ Communication, Productivity, Media
+- ✅ Window managers, Fonts, Zsh plugins
 
 📖 **See [docs/PACKAGE-SELECTION.md](docs/PACKAGE-SELECTION.md) for complete guide**
 
@@ -192,22 +214,37 @@ dev-setup/
 
 ## 🎮 Typical Workflow
 
+### First-Time Install (Recommended)
+
+```bash
+make install
+# → Automatically prompts for package selection
+# → Choose interactive or preset
+# → Installs selected packages
+```
+
 ### Full Control
+
 ```bash
 make select                 # 1. Choose packages
 make dry-run                # 2. Preview
 make install                # 3. Install
 ```
 
-### Quick Install
+### Quick Preset Install
+
 ```bash
-make install                # Uses defaults
+./lib/select-packages.sh --developer   # Choose preset
+make install                           # Install
 ```
 
-### Minimal Setup
+### Modify Existing Selection
+
 ```bash
-./lib/select-packages.sh --minimal
 make install
+# → Shows current selection
+# → Asks if you want to modify
+# → Continues or opens selection menu
 ```
 
 ---
@@ -217,6 +254,7 @@ make install
 ### Interactive Prompts
 
 The bootstrap will ask for:
+
 - Git username and email
 - Dotfiles repository URL (optional)
 - Dotfiles directory path (optional)
@@ -236,6 +274,7 @@ Your preferences are saved to `~/.dev-setup-config` for faster re-runs:
 Edit platform-specific files to add/remove packages:
 
 **macOS:** `platforms/macos/Brewfile`
+
 ```ruby
 # Add packages
 brew "your-package"
@@ -243,11 +282,13 @@ cask "your-app"
 ```
 
 **Linux:** `platforms/linux/packages.sh`
+
 ```bash
 BASE_PACKAGES=("package1" "package2")
 ```
 
 **Windows:** `platforms/windows/packages.ps1`
+
 ```powershell
 $WINGET_PACKAGES = @("package1", "package2")
 ```
@@ -259,6 +300,7 @@ $WINGET_PACKAGES = @("package1", "package2")
 Three options:
 
 ### 1. Clone from Repository
+
 ```
 Dotfiles repo URL: https://github.com/user/dotfiles
 Dotfiles directory: ~/.dotfiles
@@ -266,6 +308,7 @@ Dotfiles directory: ~/.dotfiles
 ```
 
 ### 2. Use Existing Local Directory
+
 ```
 Dotfiles repo URL: (press Enter)
 Dotfiles directory: ~/.dotfiles
@@ -273,6 +316,7 @@ Dotfiles directory: ~/.dotfiles
 ```
 
 ### 3. Skip Dotfiles
+
 ```
 Dotfiles repo URL: (press Enter)
 Dotfiles directory: (press Enter)
@@ -286,6 +330,7 @@ Dotfiles directory: (press Enter)
 ### macOS
 
 **Homebrew not found?**
+
 ```bash
 # Apple Silicon
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -294,6 +339,7 @@ eval "$(/usr/local/bin/brew shellenv)"
 ```
 
 **Permission errors?**
+
 ```bash
 sudo chown -R $(whoami) /opt/homebrew/*
 ```
@@ -301,12 +347,14 @@ sudo chown -R $(whoami) /opt/homebrew/*
 ### Linux
 
 **fnm not found?**
+
 ```bash
 source ~/.bashrc  # or ~/.zshrc
 fnm install --lts
 ```
 
 **Docker permission denied?**
+
 ```bash
 sudo usermod -aG docker $USER
 # Log out and log back in
@@ -315,12 +363,14 @@ sudo usermod -aG docker $USER
 ### General
 
 **Command not found after install?**
+
 ```bash
 # Restart your terminal or:
 source ~/.zshrc  # or ~/.bashrc
 ```
 
 **Want to start over?**
+
 ```bash
 make reset-selection
 make select
@@ -374,7 +424,7 @@ MIT License - See [LICENSE](LICENSE) file
 
 ---
 
-## ⭐ Star this repo if it helped you!
+## ⭐ Star this repo if it helped you
 
 **Happy coding!** 🚀
 

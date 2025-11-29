@@ -6,7 +6,34 @@ Complete control over what gets installed!
 
 ## 🎯 Quick Start
 
-### Method 1: Interactive Menu (Easiest)
+### ⭐ Automatic Selection (Recommended for First-Time Users)
+
+Just run the installer:
+
+```bash
+make install
+# or
+./lib/bootstrap.sh
+```
+
+**If you haven't selected packages yet**, you'll see:
+
+```text
+[INFO] No package selection found!
+
+⚠️  You haven't selected which packages to install yet.
+
+You can:
+  1) Choose packages interactively (recommended)
+  2) Use a preset (minimal/developer/full)
+  3) Install all packages (not recommended)
+
+What would you like to do? [1/2/3]
+```
+
+This ensures you **never accidentally install everything**!
+
+### Method 1: Interactive Menu
 
 ```bash
 make select
@@ -30,12 +57,12 @@ You'll see a menu:
 Choose an option [1-7]: 
 ```
 
-### Method 2: Quick Presets
+### Method 2: Quick Presets (Command Line)
 
 ```bash
-./select-packages.sh --minimal      # Essentials only
-./select-packages.sh --developer    # Recommended
-./select-packages.sh --full         # Everything
+./lib/select-packages.sh --minimal      # Essentials only
+./lib/select-packages.sh --developer    # Recommended
+./lib/select-packages.sh --full         # Everything
 ```
 
 ### Method 3: Manual Edit
@@ -164,12 +191,27 @@ vim .package-categories
 
 ## 💡 Usage Examples
 
-### Example 1: Choose Specific Categories
+### Example 1: First-Time User (Automatic Prompt)
 
 ```bash
-# Run interactive selection
-make select
+# Just run install
+make install
 
+# System prompts:
+# → What would you like to do? [1/2/3]
+# → Choose option 2 (Presets)
+# → Choose preset: [1/2/3]
+# → Select 2 (Developer preset)
+# → Installation begins with selected packages
+```
+
+### Example 2: Choose Specific Categories Interactively
+
+```bash
+# Run installer (or make select)
+make install
+
+# System prompts for package selection
 # Choose option 1 (Interactive selection)
 # Answer prompts:
 Install Essential tools? [Y/n] y
@@ -179,37 +221,47 @@ Install Browsers? [Y/n] n        ← Skip browsers
 Install Editors & IDEs? [Y/n] y
 ...
 
-# Then install
-make install
+# Installation begins automatically
 ```
 
-### Example 2: Apply Preset, Then Customize
+### Example 3: Pre-select Before Installing
 
 ```bash
-# Start with developer preset
-./select-packages.sh --developer
+# Apply preset first
+./lib/select-packages.sh --developer
 
-# View it
-./select-packages.sh --show
+# View selection
+./lib/select-packages.sh --show
 
 # Customize if needed
 vim .package-categories
 
-# Install
+# Install (won't prompt since selection exists)
 make install
 ```
 
-### Example 3: Preview Before Installing
+### Example 4: Preview Before Installing
 
 ```bash
 # Apply minimal preset
-./select-packages.sh --minimal
+./lib/select-packages.sh --minimal
 
 # Preview what will be installed
 make dry-run
 
 # If looks good, install
 make install
+```
+
+### Example 5: Modify Existing Selection
+
+```bash
+# Run installer
+make install
+
+# System shows current selection:
+# → Do you want to modify your package selection? [y/N]
+# → Press 'y' to change, or Enter to continue
 ```
 
 ---
@@ -253,10 +305,21 @@ make install
 make select
 
 # View changes
-./select-packages.sh --show
+./lib/select-packages.sh --show
 
 # Install newly selected packages
 make install
+```
+
+### Modify During Installation
+
+```bash
+# Run installer
+make install
+
+# If selection exists, you'll see:
+# "Do you want to modify your package selection? [y/N]"
+# Press 'y' to change your selection
 ```
 
 ### Reset to Defaults
@@ -265,6 +328,31 @@ make install
 make reset-selection    # Remove config
 make select             # Choose again
 ```
+
+---
+
+## 🚦 How Package Selection Works
+
+### No Selection File (First Time)
+
+When you run `make install` without a `.package-categories` file:
+
+1. ⚠️  **Warning displayed**: "No package selection found!"
+2. 🎯 **Three options presented**:
+   - Interactive selection
+   - Preset selection (minimal/developer/full)
+   - Install all (not recommended)
+3. 📝 **Creates `.package-categories`** based on your choice
+4. ✅ **Proceeds with installation**
+
+### Selection File Exists
+
+When you run `make install` with an existing `.package-categories` file:
+
+1. ✅ **Shows current selection**
+2. 🤔 **Asks**: "Do you want to modify your package selection?"
+3. ↩️  **Default is No** (press Enter to continue)
+4. 🔄 **Press 'y'** to open selection menu and make changes
 
 ---
 
@@ -386,11 +474,54 @@ cat .package-categories
 
 ## 🎉 Benefits
 
+✅ **Never Accidentally Install Everything** - Always prompts for selection first
 ✅ **Control** - Choose exactly what you want
 ✅ **Flexibility** - Different presets for different needs
-✅ **Transparency** - See what will be installed
+✅ **Transparency** - See what will be installed before it happens
 ✅ **Efficiency** - Don't install what you won't use
-✅ **Easy** - Interactive or preset-based
+✅ **Easy** - Interactive or preset-based selection
+✅ **Safe** - Can preview with dry-run before installing
+✅ **Flexible** - Can change selection anytime
+
+---
+
+## 🎓 Best Practices
+
+### 1. Start with a Preset
+
+For first-time users, start with the **Developer preset**:
+
+```bash
+# Let installer prompt you, then choose:
+# → Option 2 (Preset)
+# → Preset 2 (Developer)
+```
+
+### 2. Add More Later
+
+You can always add more packages later:
+
+```bash
+make select          # Enable more categories
+make install         # Install newly selected
+```
+
+### 3. Use Dry-Run First
+
+Preview changes before applying:
+
+```bash
+make dry-run         # See what will be installed
+make install         # Actually install
+```
+
+### 4. Different Machines, Different Setups
+
+Customize per machine:
+
+- **Work laptop**: Developer preset + Communication
+- **Personal laptop**: Full preset
+- **Server**: Minimal preset only
 
 ---
 

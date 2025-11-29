@@ -11,6 +11,8 @@ echo "╔═══════════════════════�
 echo "║   Development Environment Installer    ║"
 echo "╚════════════════════════════════════════╝"
 echo ""
+echo "📦 This installer will help you choose which packages to install"
+echo ""
 
 # Check if we're already in the repo directory
 if [ -f "lib/bootstrap.sh" ] && [ -f "Makefile" ]; then

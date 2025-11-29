@@ -12,13 +12,72 @@ Quick reference for all the ways to use this setup.
 curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
 ```
 
+**What happens:**
+1. Script detects your OS
+2. **Prompts you to select packages** (interactive/preset/all)
+3. Installs only what you selected
+
 ### Manual Install
 
 ```bash
 git clone https://github.com/username/dev-setup.git
 cd dev-setup
-./bootstrap.sh
+./lib/bootstrap.sh
 ```
+
+**First-time users:** The bootstrap will automatically ask you to choose packages if no selection exists!
+
+---
+
+## 📦 Package Selection (Automatic)
+
+### First-Time Installation
+
+When you run the installer for the first time without a `.package-categories` file, you'll see:
+
+```
+[INFO] No package selection found!
+
+⚠️  You haven't selected which packages to install yet.
+
+You can:
+  1) Choose packages interactively (recommended)
+  2) Use a preset (minimal/developer/full)
+  3) Install all packages (not recommended)
+
+What would you like to do? [1/2/3]
+```
+
+**Option 1 - Interactive Selection:**
+- Walks through each package category
+- You choose Yes/No for each
+- Most control
+
+**Option 2 - Preset Selection:**
+- Minimal: Essentials only (~5 min, ~1 GB)
+- Developer: Recommended (~15 min, ~5 GB)
+- Full: Everything (~25 min, ~6 GB)
+
+**Option 3 - Install All:**
+- Installs everything without filtering
+- Not recommended for most users
+
+### Existing Selection
+
+If you already have a `.package-categories` file, the installer will:
+
+```
+[INFO] Using package selection from .package-categories
+
+Current selection:
+[✓] Essential tools
+[✓] Programming languages
+...
+
+Do you want to modify your package selection? [y/N]
+```
+
+Press `y` to change, or Enter to continue with current selection.
 
 ---
 
@@ -27,15 +86,15 @@ cd dev-setup
 ### Standard (Default)
 
 ```bash
-./bootstrap.sh
+./lib/bootstrap.sh
 ```
 
-Installs recommended packages for development.
+Uses package selection (prompts if needed).
 
 ### Minimal
 
 ```bash
-./bootstrap.sh --minimal
+./lib/bootstrap.sh --minimal
 ```
 
 Only essential tools (git, editor, shell).
@@ -43,7 +102,7 @@ Only essential tools (git, editor, shell).
 ### Full
 
 ```bash
-./bootstrap.sh --full
+./lib/bootstrap.sh --full
 ```
 
 Everything including optional packages.
@@ -265,19 +324,48 @@ git pull --force
 
 ## 🎯 Common Workflows
 
-### New Machine Setup
+### New Machine Setup (First Time)
 
 ```bash
 curl -fsSL https://url/install.sh | bash
-# Follow prompts
+# 1. Choose package selection method when prompted
+# 2. Select packages (interactive or preset)
+# 3. Wait for installation
 # Done!
 ```
 
-### Add New Packages
+### Re-run or Update Existing Setup
+
+```bash
+cd ~/dev-setup
+make install
+# 1. Shows current selection
+# 2. Asks if you want to modify [y/N]
+# 3. Press Enter to continue or 'y' to change
+```
+
+### Select Packages Before Installing
+
+```bash
+cd ~/dev-setup
+make select          # Choose packages first
+make dry-run         # Preview what will be installed
+make install         # Install
+```
+
+### Change Package Selection Later
+
+```bash
+cd ~/dev-setup
+make select          # Re-select packages
+make install         # Install newly selected packages
+```
+
+### Add New Packages to Brewfile
 
 ```bash
 # 1. Edit package file
-vim macos/Brewfile
+vim platforms/macos/Brewfile
 
 # 2. Preview
 make dry-run
@@ -293,6 +381,7 @@ make install
 # 2. Customize packages
 # 3. Share repo URL
 # Team runs: curl -fsSL your-url/install.sh | bash
+# They'll be prompted to select packages automatically!
 ```
 
 ---

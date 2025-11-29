@@ -21,14 +21,17 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 Or use the universal launcher from the root:
 
 ```bash
-./bootstrap.sh  # Will guide you to run Windows script
+./lib/bootstrap.sh  # Will guide you to run Windows script with package selection
 ```
 
 **You'll be prompted for:**
 
+- **Package selection** - Choose which packages to install (interactive/preset/all)
 - Git name and email
 - Dotfiles repository URL (optional - for cloning)
 - Dotfiles directory path (can be local or clone destination)
+
+💡 **Tip:** On Windows, use `make select` in Git Bash or WSL to choose packages first
 
 ## packages.ps1
 

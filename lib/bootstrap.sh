@@ -126,20 +126,93 @@ parse_args() {
 check_package_selection() {
   if [ -f "$SCRIPT_DIR/.package-categories" ]; then
     log "Using package selection from .package-categories"
-  else
-    log "No package selection found. Using defaults (all enabled)"
     echo ""
-    warn "💡 Tip: Run 'dev-setup select' or 'make select' to choose packages"
+    # Show current selection briefly
+    if [ -f "$SCRIPT_DIR/lib/select-packages.sh" ]; then
+      "$SCRIPT_DIR/lib/select-packages.sh" --show 2>/dev/null || true
+    fi
     echo ""
-    read -p "Continue with all packages? [Y/n] " answer
-    answer=${answer:-Y}
+    read -p "Do you want to modify your package selection? [y/N] " answer
+    answer=${answer:-N}
     case $answer in
-      [Nn]* )
-        log "Running package selection..."
+      [Yy]* )
+        log "Opening package selection..."
         "$SCRIPT_DIR/lib/select-packages.sh"
         ;;
       * )
-        log "Continuing with all packages..."
+        log "Continuing with current selection..."
+        ;;
+    esac
+  else
+    log "No package selection found!"
+    echo ""
+    warn "⚠️  You haven't selected which packages to install yet."
+    echo ""
+    echo "You can:"
+    echo "  1) Choose packages interactively (recommended)"
+    echo "  2) Use a preset (minimal/developer/full)"
+    echo "  3) Install all packages (not recommended)"
+    echo ""
+    read -p "What would you like to do? [1/2/3] " choice
+    choice=${choice:-1}
+    
+    case $choice in
+      1)
+        log "Opening interactive package selection..."
+        "$SCRIPT_DIR/lib/select-packages.sh"
+        ;;
+      2)
+        echo ""
+        echo "Available presets:"
+        echo "  1) Minimal - Essentials only"
+        echo "  2) Developer - Recommended for most developers"
+        echo "  3) Full - Everything"
+        echo ""
+        read -p "Choose preset [1/2/3]: " preset
+        preset=${preset:-2}
+        
+        case $preset in
+          1)
+            log "Applying minimal preset..."
+            "$SCRIPT_DIR/lib/select-packages.sh" --minimal
+            ;;
+          2)
+            log "Applying developer preset..."
+            "$SCRIPT_DIR/lib/select-packages.sh" --developer
+            ;;
+          3)
+            log "Applying full preset..."
+            "$SCRIPT_DIR/lib/select-packages.sh" --full
+            ;;
+          *)
+            log "Invalid preset, using developer preset..."
+            "$SCRIPT_DIR/lib/select-packages.sh" --developer
+            ;;
+        esac
+        ;;
+      3)
+        warn "Installing all packages..."
+        # Create a config with everything enabled
+        cat > "$SCRIPT_DIR/.package-categories" << EOF
+# All packages enabled (default)
+INSTALL_ESSENTIALS=true
+INSTALL_LANGUAGES=true
+INSTALL_DEV_TOOLS=true
+INSTALL_BROWSERS=true
+INSTALL_EDITORS=true
+INSTALL_COMMUNICATION=true
+INSTALL_PRODUCTIVITY=true
+INSTALL_MEDIA=true
+INSTALL_WINDOW_MANAGERS=true
+INSTALL_FONTS=true
+INSTALL_ZSH_PLUGINS=true
+INSTALL_OPTIONAL=true
+EOF
+        log "Created .package-categories with all packages enabled"
+        ;;
+      *)
+        log "Invalid choice, opening interactive selection..."
+        "$SCRIPT_DIR/lib/select-packages.sh"
         ;;
     esac
   fi
