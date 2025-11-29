@@ -25,21 +25,27 @@ cd dev-setup
 ## 📋 Installation Modes
 
 ### Standard (Default)
+
 ```bash
 ./bootstrap.sh
 ```
+
 Installs recommended packages for development.
 
 ### Minimal
+
 ```bash
 ./bootstrap.sh --minimal
 ```
+
 Only essential tools (git, editor, shell).
 
 ### Full
+
 ```bash
 ./bootstrap.sh --full
 ```
+
 Everything including optional packages.
 
 ---
@@ -47,18 +53,23 @@ Everything including optional packages.
 ## 🔧 Command Options
 
 ### Preview Before Installing
+
 ```bash
 ./bootstrap.sh --dry-run
 ```
+
 See what will be installed without making changes.
 
 ### Skip Prompts
+
 ```bash
 ./bootstrap.sh --use-config
 ```
+
 Use saved configuration (no interactive prompts).
 
 ### Help & Version
+
 ```bash
 ./bootstrap.sh --help      # Show all options
 ./bootstrap.sh --version   # Show version
@@ -86,16 +97,19 @@ make help           # Show all commands
 ## 🔄 Updating
 
 ### Update Everything
+
 ```bash
 ./update.sh
 ```
 
 Updates:
+
 - Repository (git pull)
 - Packages (Homebrew/apt/dnf)
 - Node.js (via fnm)
 
 ### Update via Make
+
 ```bash
 make update
 ```
@@ -128,18 +142,21 @@ MODE="standard"
 ### Customize Packages
 
 **macOS:**
+
 ```bash
 vim macos/Brewfile
 ./bootstrap.sh
 ```
 
 **Linux:**
+
 ```bash
 vim linux/packages.sh
 ./bootstrap.sh
 ```
 
 **Windows:**
+
 ```powershell
 notepad windows/packages.ps1
 .\windows\bootstrap.ps1
@@ -150,16 +167,19 @@ notepad windows/packages.ps1
 ## 🔍 Dry Run Examples
 
 ### Preview Standard Install
+
 ```bash
 ./bootstrap.sh --dry-run
 ```
 
 ### Preview Minimal Install
+
 ```bash
 ./bootstrap.sh --minimal --dry-run
 ```
 
 ### Preview Full Install
+
 ```bash
 ./bootstrap.sh --full --dry-run
 ```
@@ -169,25 +189,30 @@ notepad windows/packages.ps1
 ## 💡 Tips & Tricks
 
 ### 1. Test Before Committing
+
 ```bash
 make test          # Syntax check
 make dry-run       # Preview changes
 ```
 
 ### 2. Update Regularly
+
 ```bash
 make update        # Weekly updates
 ```
 
 ### 3. Check Package Status
+
 ```bash
 make check         # See what's missing
 ```
 
 ### 4. Use Config File
+
 Save time on re-runs by using saved configuration.
 
 ### 5. Combine Flags
+
 ```bash
 ./bootstrap.sh --minimal --dry-run    # Preview minimal install
 ```
@@ -197,12 +222,14 @@ Save time on re-runs by using saved configuration.
 ## 🆘 Troubleshooting
 
 ### Script Won't Run
+
 ```bash
 chmod +x bootstrap.sh
 ./bootstrap.sh
 ```
 
 ### Permission Errors (Linux)
+
 ```bash
 sudo ./bootstrap.sh    # Not recommended
 # Or fix ownership:
@@ -210,12 +237,14 @@ sudo chown -R $USER /usr/local
 ```
 
 ### Reset Configuration
+
 ```bash
 rm ~/.dev-setup-config
 ./bootstrap.sh
 ```
 
 ### Force Update
+
 ```bash
 cd dev-setup
 git pull --force
@@ -237,6 +266,7 @@ git pull --force
 ## 🎯 Common Workflows
 
 ### New Machine Setup
+
 ```bash
 curl -fsSL https://url/install.sh | bash
 # Follow prompts
@@ -244,6 +274,7 @@ curl -fsSL https://url/install.sh | bash
 ```
 
 ### Add New Packages
+
 ```bash
 # 1. Edit package file
 vim macos/Brewfile
@@ -256,6 +287,7 @@ make install
 ```
 
 ### Share with Team
+
 ```bash
 # 1. Fork repository
 # 2. Customize packages
@@ -266,4 +298,3 @@ make install
 ---
 
 **Happy coding!** 🎉
-

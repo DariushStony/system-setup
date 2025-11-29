@@ -117,6 +117,32 @@ parse_args() {
 }
 
 ########################################
+# Check Package Selection
+########################################
+
+check_package_selection() {
+  if [ -f ".package-categories" ]; then
+    log "Using package selection from .package-categories"
+  else
+    log "No package selection found. Using defaults (all enabled)"
+    echo ""
+    warn "💡 Tip: Run './select-packages.sh' or 'make select' to choose packages"
+    echo ""
+    read -p "Continue with all packages? [Y/n] " answer
+    answer=${answer:-Y}
+    case $answer in
+      [Nn]* )
+        log "Running package selection..."
+        ./select-packages.sh
+        ;;
+      * )
+        log "Continuing with all packages..."
+        ;;
+    esac
+  fi
+}
+
+########################################
 # Detect Operating System
 ########################################
 
@@ -207,6 +233,12 @@ main() {
   
   parse_args "$@"
   detect_os
+  
+  # Check package selection (unless dry-run)
+  if [ "$DRY_RUN" = false ]; then
+    check_package_selection
+  fi
+  
   run_bootstrap
   
   if [ "$DRY_RUN" = false ]; then

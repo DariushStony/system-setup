@@ -1,12 +1,13 @@
 # Development Environment Setup - Makefile
 # Quick commands for common tasks
 
-.PHONY: help install update check clean test
+.PHONY: help install update check clean test select
 
 help:
 	@echo "🚀 Development Environment Setup"
 	@echo ""
 	@echo "Available commands:"
+	@echo "  make select         - Choose which packages to install"
 	@echo "  make install        - Run bootstrap setup"
 	@echo "  make install-min    - Minimal installation"
 	@echo "  make install-full   - Full installation"
@@ -16,6 +17,12 @@ help:
 	@echo "  make clean          - Clean up temporary files"
 	@echo "  make test           - Test bootstrap script"
 	@echo ""
+	@echo "💡 Tip: Run 'make select' first to choose what to install"
+	@echo ""
+
+select:
+	@echo "📦 Package Selection Tool"
+	./select-packages.sh
 
 install:
 	@echo "🚀 Running bootstrap..."
@@ -52,7 +59,13 @@ dry-run:
 clean:
 	@echo "🧹 Cleaning up..."
 	@rm -f .dev-setup-config.tmp
+	@rm -f .package-categories.backup
 	@echo "Done!"
+
+reset-selection:
+	@echo "🔄 Resetting package selection..."
+	@rm -f .package-categories
+	@echo "Run 'make select' to choose packages again"
 
 test:
 	@echo "🧪 Testing bootstrap script..."

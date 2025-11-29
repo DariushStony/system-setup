@@ -70,7 +70,49 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 
 ## ⚡ New Features
 
+### 🎯 Choose What to Install
+
+**Interactive selection - pick categories:**
+```bash
+make select                     # Interactive menu
+./select-packages.sh            # Or run directly
+```
+
+**Quick presets:**
+```bash
+./select-packages.sh --minimal      # Essentials only
+./select-packages.sh --developer    # Recommended for devs  
+./select-packages.sh --full         # Everything
+./select-packages.sh --show         # See current selection
+```
+
+**Package categories:**
+- Essential tools, Programming languages, Dev tools
+- Browsers, Editors, Communication apps
+- Productivity, Media, Window managers
+- Fonts, Zsh plugins, Optional tools
+
+### 🎯 Choose What to Install (NEW!)
+
+**Interactive selection:**
+```bash
+make select                         # Choose categories interactively
+./select-packages.sh               # Interactive menu
+```
+
+**Quick presets:**
+```bash
+./select-packages.sh --minimal      # Essentials only (~1 GB)
+./select-packages.sh --developer    # Recommended (~5 GB)
+./select-packages.sh --full         # Everything (~6 GB)
+```
+
+**Package categories:** Essential tools, Languages, Dev tools, Browsers, Editors, Communication, Productivity, Media, Window managers, Fonts, Zsh plugins, Optional
+
+📖 **See [PACKAGE-SELECTION.md](PACKAGE-SELECTION.md) for complete guide**
+
 ### Installation Modes
+
 ```bash
 ./bootstrap.sh --minimal    # Essentials only
 ./bootstrap.sh --standard   # Recommended (default)
@@ -78,30 +120,59 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 ```
 
 ### Dry Run
+
 ```bash
 ./bootstrap.sh --dry-run    # Preview without installing
 ```
 
 ### Config File Support
+
 Saves your preferences to `~/.dev-setup-config` for faster re-runs:
+
 ```bash
 ./bootstrap.sh --use-config  # Skip prompts
 ```
 
 ### Easy Updates
+
 ```bash
 ./update.sh                 # Update everything
 make update                 # Or use make
 ```
 
 ### Quick Commands
+
 ```bash
+make select                 # Choose packages interactively  
 make help                   # Show all commands
 make check                  # Check package status
 make test                   # Test scripts
 ```
 
 📖 **See [USAGE.md](USAGE.md) for complete guide**
+
+---
+
+## 🎮 Typical Workflows
+
+### Full Control (Recommended)
+```bash
+make select                 # 1. Choose what to install
+make dry-run                # 2. Preview
+make install                # 3. Install selected packages
+make update                 # 4. Update later
+```
+
+### Quick Start
+```bash
+make install                # Uses defaults, prompts to customize
+```
+
+### Minimal Setup
+```bash
+./select-packages.sh --minimal    # Apply minimal preset
+make install                      # Install only essentials
+```
 
 ## 📦 What Gets Installed
 
