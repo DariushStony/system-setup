@@ -1,6 +1,6 @@
 # 📁 Project Structure
 
-Clean, professional directory organization for the dev-setup project.
+Simple, clean directory organization for one-time development environment setup.
 
 ---
 
@@ -8,9 +8,6 @@ Clean, professional directory organization for the dev-setup project.
 
 ```
 dev-setup/
-├── bin/                    # Executable CLI tool
-│   └── dev-setup          # Main CLI executable
-│
 ├── lib/                    # Core functionality scripts
 │   ├── bootstrap.sh       # Universal bootstrap launcher
 │   ├── select-packages.sh # Package selection tool
@@ -30,23 +27,15 @@ dev-setup/
 │       ├── packages.ps1   # Windows packages
 │       └── README.md      # Windows-specific docs
 │
-├── completions/            # Shell auto-completions
-│   ├── dev-setup.bash     # Bash completion
-│   └── dev-setup.zsh      # Zsh completion
-│
 ├── docs/                   # Documentation
-│   ├── CLI-GUIDE.md       # Complete CLI guide
 │   ├── USAGE.md           # Usage instructions
-│   ├── PACKAGE-SELECTION.md # Package selection guide
-│   └── QUICK-REFERENCE.md # Quick reference card
-│
-├── scripts/                # Installation scripts
-│   └── install-cli.sh     # CLI tool installer
+│   └── PACKAGE-SELECTION.md # Package selection guide
 │
 ├── README.md              # Main documentation
 ├── LICENSE                # MIT License
-├── Makefile               # Build & task automation
+├── Makefile               # Simple commands (make install, etc.)
 ├── install.sh             # One-line remote installer
+├── STRUCTURE.md           # This file
 └── .package-categories    # Package selection config (generated)
 ```
 
@@ -54,12 +43,8 @@ dev-setup/
 
 ## 📖 Directory Descriptions
 
-### `bin/` - Executables
-Contains the main CLI executable that users interact with.
-- **`dev-setup`**: The main CLI tool symlinked to `/usr/local/bin`
-
-### `lib/` - Core Libraries
-Core functionality and helper scripts used by the CLI tool.
+### `lib/` - Core Scripts
+Core functionality and helper scripts.
 - **`bootstrap.sh`**: Universal launcher that detects OS and calls platform scripts
 - **`select-packages.sh`**: Interactive package selection tool
 - **`update.sh`**: Updates packages and dependencies
@@ -70,21 +55,10 @@ Separated by operating system for clean organization.
 - **`linux/`**: apt/dnf/pacman-based setup for Linux distributions
 - **`windows/`**: Winget/Chocolatey-based setup for Windows
 
-### `completions/` - Shell Completions
-Auto-completion files for better CLI experience.
-- **`dev-setup.bash`**: Bash shell completion
-- **`dev-setup.zsh`**: Zsh shell completion
-
 ### `docs/` - Documentation
-All documentation files organized in one place.
-- **`CLI-GUIDE.md`**: Complete CLI tool documentation
+Documentation files organized in one place.
 - **`USAGE.md`**: Detailed usage instructions
 - **`PACKAGE-SELECTION.md`**: Package selection guide
-- **`QUICK-REFERENCE.md`**: Quick reference card
-
-### `scripts/` - Utility Scripts
-Installation and setup scripts.
-- **`install-cli.sh`**: Installs the CLI tool globally
 
 ### Root Files
 Essential files in the root directory:
@@ -98,29 +72,25 @@ Essential files in the root directory:
 
 ## 🎯 Design Principles
 
-### 1. Separation of Concerns
-- **bin/**: User-facing interface
-- **lib/**: Core logic
-- **platforms/**: Platform-specific implementations
-- **docs/**: Documentation
+### 1. Simplicity
+- Only essential files
+- Clear directory names
+- Easy to understand
 
-### 2. Clean Root Directory
+### 2. One-Time Focus
+- No CLI tool installation
+- No completion scripts
+- Direct script execution
+
+### 3. Clean Root Directory
 Only essential files in root:
-- README, LICENSE, Makefile
+- README, LICENSE, Makefile, install.sh
 - No clutter, easy to navigate
 
-### 3. Self-Documenting Structure
-Directory names clearly indicate contents:
-- `bin/` for executables
-- `lib/` for libraries
-- `platforms/` for platform code
-- `docs/` for documentation
-
-### 4. Standard Conventions
-Follows common project structures:
-- Similar to projects like: Homebrew, rbenv, nvm
-- Familiar to developers
-- Easy to understand
+### 4. Platform Separation
+- Each platform in its own directory
+- No mixing of macOS and Linux code
+- Easy to customize per platform
 
 ---
 
@@ -139,25 +109,13 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 "$SCRIPT_DIR/platforms/macos/bootstrap.sh"
 ```
 
-### In CLI Tool (`bin/dev-setup`)
-
-```bash
-BIN_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-SCRIPT_DIR="$(cd "$BIN_DIR/.." && pwd)"
-LIB_DIR="$SCRIPT_DIR/lib"
-
-# Use these to reference files
-"$LIB_DIR/bootstrap.sh"
-"$SCRIPT_DIR/platforms/macos/bootstrap.sh"
-```
-
 ---
 
-## 📦 Package Files Location
+## 📦 Configuration Files
 
-### Configuration Files
+### Generated Files
 
-Generated files stay in root for easy access:
+Stay in root for easy access:
 - `.package-categories` - Package selection (root)
 - `~/.dev-setup-config` - User config (home directory)
 
@@ -172,52 +130,12 @@ In platform directories:
 
 ## 🚀 Benefits of This Structure
 
-✅ **Clean** - Root directory is not cluttered
-✅ **Professional** - Follows industry standards
-✅ **Scalable** - Easy to add new platforms or scripts
+✅ **Simple** - Only what's needed, nothing extra
+✅ **Clean** - Root directory is organized
+✅ **Professional** - Follows standard conventions
 ✅ **Maintainable** - Clear where everything belongs
-✅ **User-Friendly** - Users only interact with simple commands
-✅ **Developer-Friendly** - Easy to contribute and understand
-
----
-
-## 🔄 Migration from Old Structure
-
-### Old Structure (Flat)
-```
-dev-setup/
-├── dev-setup
-├── bootstrap.sh
-├── select-packages.sh
-├── update.sh
-├── install-cli.sh
-├── macos/
-├── linux/
-├── windows/
-├── completions/
-├── CLI-GUIDE.md
-├── USAGE.md
-└── ...
-```
-
-### New Structure (Organized)
-```
-dev-setup/
-├── bin/dev-setup
-├── lib/bootstrap.sh, select-packages.sh, update.sh
-├── platforms/macos, linux, windows
-├── completions/
-├── docs/CLI-GUIDE.md, USAGE.md
-├── scripts/install-cli.sh
-└── README.md, LICENSE, Makefile
-```
-
-**Changes:**
-- Moved `dev-setup` → `bin/dev-setup`
-- Moved scripts → `lib/`
-- Renamed `macos/` → `platforms/macos/`
-- Moved docs → `docs/`
-- Moved `install-cli.sh` → `scripts/`
+✅ **User-Friendly** - Easy to use and understand
+✅ **Platform-Agnostic** - Supports macOS, Linux, Windows
 
 ---
 
@@ -233,9 +151,6 @@ mkdir -p platforms/freebsd
 ```bash
 # Add to lib/ for core functionality
 lib/backup.sh
-
-# Or scripts/ for utilities
-scripts/uninstall.sh
 ```
 
 ### Adding Documentation
@@ -246,19 +161,16 @@ docs/TROUBLESHOOTING.md
 
 ---
 
-## 📊 File Count by Directory
+## 📊 File Count
 
 | Directory | Files | Purpose |
 |-----------|-------|---------|
-| `bin/` | 1 | CLI executable |
 | `lib/` | 3 | Core scripts |
 | `platforms/` | 9 | Platform-specific code |
-| `completions/` | 2 | Shell completions |
-| `docs/` | 4 | Documentation |
-| `scripts/` | 1 | Utilities |
-| **Root** | 4 | Essential files only |
+| `docs/` | 2 | Documentation |
+| **Root** | 5 | Essential files only |
 
-**Total: 24 organized files**
+**Total: ~20 organized files**
 
 ---
 
@@ -266,11 +178,10 @@ docs/TROUBLESHOOTING.md
 
 1. **Keep root clean** - Only essential files
 2. **Use relative paths** - Portable across systems
-3. **Separate platforms** - Don't mix macOS and Linux code
+3. **Separate platforms** - Don't mix platform code
 4. **Document structure** - This file!
 5. **Follow conventions** - Use standard directory names
 
 ---
 
-**This structure makes the project professional and maintainable!** 🎉
-
+**Simple structure for one-time setup!** 🎉

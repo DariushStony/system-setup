@@ -1,16 +1,8 @@
-# 🚀 dev-setup - Cross-Platform Development Environment CLI
+# 🚀 Cross-Platform Development Setup
 
-Professional CLI tool for automated development environment setup on **macOS**, **Linux**, and **Windows**.
+Automated one-time setup for development environment on **macOS**, **Linux**, and **Windows**.
 
-One command to set up your entire dev environment with package managers, dotfiles, and sensible defaults.
-
-```bash
-# Install CLI tool
-./install-cli.sh
-
-# Use anywhere
-dev-setup install
-```
+One command to install everything: package managers, development tools, applications, and dotfiles.
 
 ## 🖥️ Supported Platforms
 
@@ -18,215 +10,55 @@ dev-setup install
 - ✅ **Linux** (Ubuntu, Debian, Fedora, Arch)
 - ✅ **Windows** (using Winget & Chocolatey)
 
+---
+
 ## 🚀 Quick Start
 
-### ⭐ One-Time Setup (Simplest - No CLI Install)
-
-For one-time machine setup, just run directly:
+### Method 1: One-Line Remote Install (Easiest)
 
 ```bash
-# Option 1: Remote install (easiest)
 curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
-# ✅ Done! Packages installed, no CLI needed
-
-# Option 2: Local install
-git clone <your-repo-url> ~/dev-setup
-cd ~/dev-setup
-make install
-# ✅ Done! Can delete repo after if you want
 ```
 
-**Use this if:** Setting up a new machine once, don't need ongoing management.
+**That's it!** ☕ Grab coffee while it installs (~15-20 minutes).
 
 ---
 
-### 🔄 Install CLI Tool (For Ongoing Use)
-
-If you'll **update packages regularly** or **manage multiple machines**:
+### Method 2: Clone and Run
 
 ```bash
-# Clone and install CLI
+# Clone
 git clone <your-repo-url> ~/dev-setup
 cd ~/dev-setup
-./scripts/install-cli.sh
 
-# Now use from anywhere!
-dev-setup select         # Choose packages
-dev-setup install        # Install
-dev-setup update         # Update later
-dev-setup doctor         # Check health
+# Choose packages (optional)
+make select
+
+# Install
+make install
 ```
 
-**Use this if:** You want easy updates, troubleshooting tools, or manage multiple systems.
+---
 
-📖 **See [docs/CLI-GUIDE.md](docs/CLI-GUIDE.md) for complete CLI documentation**
-
-### Option 4: Platform-Specific Scripts
+### Method 3: Platform-Specific
 
 **macOS:**
-
 ```bash
-cd ~/dev-setup/macos
+cd ~/dev-setup/platforms/macos
 ./bootstrap.sh
 ```
 
 **Linux:**
-
 ```bash
-cd ~/dev-setup/linux
+cd ~/dev-setup/platforms/linux
 ./bootstrap.sh
 ```
 
 **Windows (PowerShell as Administrator):**
-
 ```powershell
-cd ~/dev-setup/windows
+cd ~/dev-setup/platforms/windows
 .\bootstrap.ps1
 ```
-
-**That's it!** ☕ Grab some coffee while it installs everything (~10-20 minutes).
-
----
-
-## ⚡ New Features
-
-### 🎯 Choose What to Install
-
-**Interactive selection - pick categories:**
-
-```bash
-make select                     # Interactive menu
-./select-packages.sh            # Or run directly
-```
-
-**Quick presets:**
-
-```bash
-./select-packages.sh --minimal      # Essentials only
-./select-packages.sh --developer    # Recommended for devs  
-./select-packages.sh --full         # Everything
-./select-packages.sh --show         # See current selection
-```
-
-**Package categories:**
-
-- Essential tools, Programming languages, Dev tools
-- Browsers, Editors, Communication apps
-- Productivity, Media, Window managers
-- Fonts, Zsh plugins, Optional tools
-
-### 🎯 Choose What to Install (NEW!)
-
-**Interactive selection:**
-
-```bash
-make select                         # Choose categories interactively
-./select-packages.sh               # Interactive menu
-```
-
-**Quick presets:**
-
-```bash
-./select-packages.sh --minimal      # Essentials only (~1 GB)
-./select-packages.sh --developer    # Recommended (~5 GB)
-./select-packages.sh --full         # Everything (~6 GB)
-```
-
-**Package categories:** Essential tools, Languages, Dev tools, Browsers, Editors, Communication, Productivity, Media, Window managers, Fonts, Zsh plugins, Optional
-
-📖 **See [docs/PACKAGE-SELECTION.md](docs/PACKAGE-SELECTION.md) for complete guide**
-
-### Installation Modes
-
-```bash
-./bootstrap.sh --minimal    # Essentials only
-./bootstrap.sh --standard   # Recommended (default)
-./bootstrap.sh --full       # Everything
-```
-
-### Dry Run
-
-```bash
-./bootstrap.sh --dry-run    # Preview without installing
-```
-
-### Config File Support
-
-Saves your preferences to `~/.dev-setup-config` for faster re-runs:
-
-```bash
-./bootstrap.sh --use-config  # Skip prompts
-```
-
-### Easy Updates
-
-```bash
-./update.sh                 # Update everything
-make update                 # Or use make
-```
-
-### Quick Commands
-
-```bash
-make select                 # Choose packages interactively  
-make help                   # Show all commands
-make check                  # Check package status
-make test                   # Test scripts
-```
-
-📖 **See [docs/USAGE.md](docs/USAGE.md) for complete guide**
-
----
-
-## 🎮 Typical Workflows
-
-### Full Control (Recommended)
-
-```bash
-make select                 # 1. Choose what to install
-make dry-run                # 2. Preview
-make install                # 3. Install selected packages
-make update                 # 4. Update later
-```
-
-### Quick Start
-
-```bash
-make install                # Uses defaults, prompts to customize
-```
-
-### Minimal Setup
-
-```bash
-./select-packages.sh --minimal    # Apply minimal preset
-make install                      # Install only essentials
-```
-
----
-
-## 📁 Project Structure
-
-Clean, professional directory organization:
-
-```
-dev-setup/
-├── bin/                    # CLI executable
-│   └── dev-setup
-├── lib/                    # Core scripts
-│   ├── bootstrap.sh
-│   ├── select-packages.sh
-│   └── update.sh
-├── platforms/              # Platform-specific code
-│   ├── macos/
-│   ├── linux/
-│   └── windows/
-├── completions/            # Shell completions
-├── docs/                   # Documentation
-├── scripts/                # Utilities
-└── README.md, LICENSE, Makefile
-```
-
-📖 **See [STRUCTURE.md](STRUCTURE.md) for detailed structure documentation**
 
 ---
 
@@ -234,381 +66,226 @@ dev-setup/
 
 ### Core Development Tools (All Platforms)
 
-- **fnm** - Fast Node.js version manager (40x faster than nvm!)
+- **fnm** - Fast Node.js version manager
 - **Node.js LTS** - JavaScript runtime
-- **Go** - Go programming language
+- **pnpm** - Fast package manager
+- **Go** - Go programming language  
 - **Python** - Python 3.x
-- **Docker** - Containerization platform
-- **Git** - Version control with custom config
-- **VS Code** - Code editor
+- **Docker** - Containerization
+- **Git** - Version control
 
-### CLI Tools (All Platforms)
+### CLI Tools
 
-- **curl**, **wget** - Download utilities
-- **httpie** - Modern HTTP client
-- **jq** - JSON processor
-- **ripgrep** - Fast grep alternative
-- **fd** - Fast find alternative
-- **fzf** - Fuzzy finder
-- **bat** - Modern cat with syntax highlighting
-- **neovim** - Modern vim
+- curl, wget, tree, htop, jq
+- tmux - Terminal multiplexer
+- starship - Cross-shell prompt
+- Zsh plugins (autosuggestions, syntax highlighting)
 
-### macOS Specific
+### GUI Applications (macOS/Linux)
 
-- **Homebrew** - Package manager
-- **Cursor** - AI-powered editor
-- **Arc Browser** - Modern web browser
-- **Raycast** - Spotlight replacement
-- **Rectangle** - Window manager
-- **iTerm2** / **Warp** - Modern terminals
-- **Postman**, **Proxyman** - API tools
+- **Browsers**: Chrome, Firefox, Arc
+- **Editors**: VS Code, Cursor, WebStorm
+- **Development**: Postman, Proxyman, HTTPie
+- **Communication**: Slack, Microsoft Teams
+- **Productivity**: Figma, Obsidian, Excalidraw
+- **Window Management**: Rectangle, Raycast (macOS)
 
-### Linux Specific
+### Developer Fonts
 
-- **Docker** - Native containerization
-- **tmux** - Terminal multiplexer
-- **Zsh** with Oh-My-Zsh
-- Package managers: **apt**, **dnf**, or **pacman** (auto-detected)
+- JetBrains Mono
+- Fira Code
+- Cascadia Code
 
-### Windows Specific
+**Total: 50+ packages** (customizable!)
 
-- **Winget** & **Chocolatey** - Package managers
-- **Windows Terminal** - Modern terminal
-- **PowerToys** - Windows utilities
-- **PowerShell 7** - Modern shell
-- **WSL** (optional) - Linux subsystem
+---
 
-### Developer Fonts (All Platforms)
+## 🎯 Features
 
-- **JetBrains Mono**
-- **Fira Code**
-- **Cascadia Code**
+### 🎨 Interactive Package Selection
 
-### Communication & Productivity (Where Available)
+Choose exactly what you want to install:
 
-- **Slack**, **Microsoft Teams**
-- **Figma**, **Obsidian**, **Excalidraw**
-- **Spotify**, **VLC**
-- **Chrome**, **Firefox**, **Edge**
+```bash
+make select                        # Interactive menu
+./lib/select-packages.sh --minimal     # Essentials only
+./lib/select-packages.sh --developer   # Recommended
+./lib/select-packages.sh --full        # Everything
+```
 
-**Total packages vary by platform:**
+**Package categories:**
+- Essential tools, Programming languages
+- Development tools, Browsers, Editors  
+- Communication, Productivity, Media
+- Window managers, Fonts, Zsh plugins
 
-- macOS: **60+ packages**
-- Linux: **40+ packages**
-- Windows: **50+ packages**
+📖 **See [docs/PACKAGE-SELECTION.md](docs/PACKAGE-SELECTION.md) for complete guide**
 
-## 📁 Repository Structure
+---
+
+### ⚙️ Installation Modes
+
+```bash
+./lib/bootstrap.sh --minimal    # Essentials only (~5 min)
+./lib/bootstrap.sh --standard   # Recommended (~15 min)
+./lib/bootstrap.sh --full       # Everything (~25 min)
+```
+
+---
+
+### 🔍 Dry Run
+
+Preview without installing:
+
+```bash
+make dry-run
+./lib/bootstrap.sh --dry-run
+```
+
+---
+
+### 🔄 Easy Updates
+
+```bash
+make update                 # Update all packages
+./lib/update.sh            # Or run directly
+```
+
+---
+
+### ⚡ Simple Commands via Makefile
+
+```bash
+make help                   # Show all commands
+make install                # Install packages
+make select                 # Choose packages
+make update                 # Update packages
+make check                  # Check status
+make test                   # Test scripts
+```
+
+📖 **See [docs/USAGE.md](docs/USAGE.md) for complete guide**
+
+---
+
+## 📁 Project Structure
 
 ```
 dev-setup/
-├── bootstrap.sh                # ⭐ Universal launcher (auto-detects OS)
-│
-├── macos/                      # 🍎 macOS
-│   ├── bootstrap.sh           # macOS bootstrap script
-│   ├── Brewfile               # Homebrew packages (60+)
-│   └── README.md              # Package management guide
-│
-├── linux/                      # 🐧 Linux
-│   ├── bootstrap.sh           # Linux bootstrap script
-│   ├── packages.sh            # Package lists (40+)
-│   └── README.md              # Package management guide
-│
-├── windows/                    # 🪟 Windows
-│   ├── bootstrap.ps1          # Windows bootstrap script
-│   ├── packages.ps1           # Winget + Chocolatey packages (50+)
-│   └── README.md              # Package management guide
-│
-├── .gitignore                  # Git ignore file
-├── LICENSE                     # MIT License
-└── README.md                   # 📖 Main documentation (this file)
+├── lib/                    # Core scripts
+│   ├── bootstrap.sh       # Universal launcher
+│   ├── select-packages.sh # Package selection
+│   └── update.sh          # Update script
+├── platforms/              # Platform-specific
+│   ├── macos/             # Homebrew packages
+│   ├── linux/             # apt/dnf packages
+│   └── windows/           # Winget/Chocolatey
+├── docs/                   # Documentation
+├── install.sh             # One-line installer
+├── Makefile               # Simple commands
+└── README.md
 ```
 
-## 🔧 What the Bootstrap Scripts Do
+📖 **See [STRUCTURE.md](STRUCTURE.md) for details**
 
-### All Platforms
+---
 
-1. ✅ Installs **package manager** (Homebrew/apt/winget)
-2. ✅ Installs **Git** and development tools
-3. ✅ Installs **fnm** (Fast Node Manager)
-4. ✅ Installs **Node.js LTS** via fnm
-5. ✅ Installs **Docker** and container tools
-6. ✅ Installs **programming languages** (Go, Python)
-7. ✅ Installs **CLI utilities** (curl, wget, httpie, etc.)
-8. ✅ Installs **GUI applications** (VS Code, browsers, etc.)
-9. ✅ Clones your **dotfiles** repository
-10. ✅ Symlinks dotfiles to appropriate locations
-11. ✅ Configures **Git** globally
+## 🎮 Typical Workflow
 
-### Platform-Specific
+### Full Control
+```bash
+make select                 # 1. Choose packages
+make dry-run                # 2. Preview
+make install                # 3. Install
+```
 
-**macOS:**
+### Quick Install
+```bash
+make install                # Uses defaults
+```
 
-- Installs Xcode Command Line Tools
-- Runs `brew bundle` (installs 60+ packages from Brewfile)
-- Applies macOS defaults (fast key repeat, Finder settings)
-- Installs fonts via Homebrew cask
+### Minimal Setup
+```bash
+./lib/select-packages.sh --minimal
+make install
+```
 
-**Linux:**
-
-- Auto-detects distro (Ubuntu/Debian/Fedora/Arch)
-- Uses appropriate package manager (apt/dnf/pacman)
-- Installs Oh-My-Zsh with plugins
-- Changes default shell to zsh
-- Installs GUI apps where available
-
-**Windows:**
-
-- Installs Winget and Chocolatey
-- Sets up PowerShell profile with fnm
-- Installs fonts via Chocolatey
-- Configures Windows Terminal
-- Optional: Installs WSL (Windows Subsystem for Linux)
+---
 
 ## ⚙️ Configuration
 
-### Interactive Setup (Recommended)
+### Interactive Prompts
 
-The bootstrap scripts now **prompt for user input** - no need to edit files!
+The bootstrap will ask for:
+- Git username and email
+- Dotfiles repository URL (optional)
+- Dotfiles directory path (optional)
 
-When you run a bootstrap script, it will ask:
+### Saved Configuration
 
-```
-Enter your full name for Git: John Doe
-Enter your email for Git: john@example.com
-Enter your dotfiles repository URL (or press Enter to skip): git@github.com:user/dotfiles.git
-Enter dotfiles directory [default: ~/.dotfiles]: 
-```
-
-### Dotfiles Setup (Optional but Recommended)
-
-The bootstrap scripts support both **remote** and **local** dotfiles management.
-
-#### Option 1: Clone from Repository (Recommended)
-
-1. Create a separate repository for your dotfiles (e.g., `github.com/username/dotfiles`)
-2. Structure it like this:
-
-   ```
-   dotfiles/
-   ├── git/.gitconfig
-   ├── zsh/.zshrc
-   ├── vscode/settings.json
-   └── README.md
-   ```
-
-3. When running bootstrap:
-
-   ```bash
-   Enter your dotfiles repository URL: git@github.com:username/dotfiles.git
-   Enter dotfiles directory [default: ~/.dotfiles]: ▊  # Press Enter for default
-   ```
-
-4. The script clones and symlinks automatically
-
-#### Option 2: Use Local Directory
-
-If you already have dotfiles locally:
+Your preferences are saved to `~/.dev-setup-config` for faster re-runs:
 
 ```bash
-Enter your dotfiles repository URL: ▊  # Press Enter to skip
-Enter dotfiles directory [default: ~/.dotfiles]: ~/my-configs  # Your local path
+./lib/bootstrap.sh --use-config  # Skip prompts
 ```
 
-#### Option 3: Skip Dotfiles
+---
 
-Press Enter twice to use defaults (will skip if directory doesn't exist):
+## 🔧 Package Customization
 
-```bash
-Enter your dotfiles repository URL: ▊
-Enter dotfiles directory [default: ~/.dotfiles]: ▊
-```
+Edit platform-specific files to add/remove packages:
 
-**Example dotfiles repositories for inspiration:**
-
-- [mathiasbynens/dotfiles](https://github.com/mathiasbynens/dotfiles)
-- [holman/dotfiles](https://github.com/holman/dotfiles)
-- [paulirish/dotfiles](https://github.com/paulirish/dotfiles)
-
-### Package Customization
-
-Edit the package lists in platform-specific folders:
-
-**macOS** - Edit `macos/Brewfile`:
-
+**macOS:** `platforms/macos/Brewfile`
 ```ruby
-brew "your-package"        # Add CLI tool
-cask "your-app"            # Add GUI app
-# brew "unwanted"          # Comment out unwanted packages
+# Add packages
+brew "your-package"
+cask "your-app"
 ```
 
-**Linux** - Edit `linux/packages.sh`:
-
+**Linux:** `platforms/linux/packages.sh`
 ```bash
-BASE_PACKAGES=(
-  "curl"
-  "your-package"  # Add your package
-)
-INSTALL_DOCKER=true  # Configuration flags
+BASE_PACKAGES=("package1" "package2")
 ```
 
-**Windows** - Edit `windows/packages.ps1`:
-
+**Windows:** `platforms/windows/packages.ps1`
 ```powershell
-$WINGET_PACKAGES = @(
-    @{Id="Your.Package"; Name="Your Package"}
-)
-$CHOCOLATEY_PACKAGES = @("your-package")
-$INSTALL_WSL = $false  # Configuration flags
+$WINGET_PACKAGES = @("package1", "package2")
 ```
 
-See each platform's `README.md` for detailed package management guides.
+---
 
-## 📚 Documentation
+## 🔄 Dotfiles Management
 
-- **[SETUP-INSTRUCTIONS.md](SETUP-INSTRUCTIONS.md)** - Comprehensive setup guide
-- **[CHANGELOG.md](CHANGELOG.md)** - Recent changes and updates
+Three options:
 
-## 🔍 Key Features
-
-### ⚡️ Fast Node.js Management with fnm
-
-```bash
-fnm install --lts        # Install latest LTS
-fnm install 18           # Install specific version
-fnm use 20               # Switch versions
-fnm default 20           # Set default
+### 1. Clone from Repository
+```
+Dotfiles repo URL: https://github.com/user/dotfiles
+Dotfiles directory: ~/.dotfiles
+→ Clones and symlinks automatically
 ```
 
-Auto-switches Node versions based on `.node-version` or `.nvmrc` files!
-
-### 🎨 macOS Defaults Applied
-
-- Show all file extensions in Finder
-- **Fast key repeat** (perfect for Vim users)
-- Disable press-and-hold (enables key repeat)
-- Show path bar in Finder
-- Custom Dock settings
-
-### 🔗 Dotfiles Management
-
-The bootstrap scripts support both remote and local dotfiles:
-
-**Clone from Repository:**
-
-- Provide your dotfiles repo URL when prompted
-- Script clones to specified directory (default: `~/.dotfiles`)
-- Automatically creates symlinks
-
-**Use Local Directory:**
-
-- Skip the repository URL prompt (press Enter)
-- Enter path to your existing dotfiles directory
-- Script creates symlinks from that location
-
-**Benefits:**
-
-- ✅ Flexible: Remote or local dotfiles
-- ✅ Version controlled (if using repo)
-- ✅ Portable across machines
-- ✅ Customizable location
-- ✅ Easy to update and maintain
-
-## 📦 Optional Packages
-
-In `Brewfile`, many useful tools are commented out. Uncomment what you need:
-
-```ruby
-# Modern CLI tools
-brew "fzf"           # Fuzzy finder
-brew "ripgrep"       # Fast grep
-brew "jq"            # JSON processor
-brew "gh"            # GitHub CLI
-
-# Smart navigation
-brew "zoxide"        # Smart cd
-brew "bat"           # Better cat
-
-# Package managers
-brew "pnpm"
-brew "yarn"
-
-# Kubernetes
-brew "kubernetes-cli"
-brew "helm"
+### 2. Use Existing Local Directory
+```
+Dotfiles repo URL: (press Enter)
+Dotfiles directory: ~/.dotfiles
+→ Symlinks from existing directory
 ```
 
-## 🛠️ Useful Commands
-
-```bash
-# Update everything
-brew update && brew upgrade && brew cleanup
-
-# Reinstall from Brewfile
-brew bundle
-
-# Generate new Brewfile from installed apps
-brew bundle dump --force
-
-# List installed packages
-brew list --formula    # CLI tools
-brew list --cask       # GUI apps
+### 3. Skip Dotfiles
+```
+Dotfiles repo URL: (press Enter)
+Dotfiles directory: (press Enter)
+→ Skips dotfiles setup
 ```
 
-## 🔄 Updating Your Setup
-
-**macOS:**
-
-```bash
-cd ~/dev-setup
-git pull
-brew bundle          # Install any new packages
-source ~/.zshrc      # Reload shell config
-```
-
-**Linux:**
-
-```bash
-cd ~/dev-setup
-git pull
-# Re-run bootstrap or install packages manually
-source ~/.zshrc
-```
-
-**Windows:**
-
-```powershell
-cd ~\dev-setup
-git pull
-# Re-run bootstrap-windows.ps1
-. $PROFILE  # Reload PowerShell profile
-```
-
-## 🔄 Platform Comparison
-
-| Feature | macOS | Linux | Windows |
-|---------|-------|-------|---------|
-| Package Manager | Homebrew | apt/dnf/pacman | Winget + Chocolatey |
-| Node Manager | fnm | fnm | fnm |
-| Shell | Zsh | Zsh/Bash | PowerShell |
-| Terminal | iTerm2/Warp | Native | Windows Terminal |
-| Docker | Docker Desktop | Native Docker | Docker Desktop |
-| Fonts | Homebrew Cask | Manual/Package | Chocolatey |
-| Setup Time | ~15 min | ~10 min | ~20 min |
-| Packages | 60+ | 40+ | 50+ |
+---
 
 ## 🆘 Troubleshooting
 
 ### macOS
 
-**fnm not working?**
-
-```bash
-source ~/.zshrc
-fnm install --lts
-```
-
-**Homebrew command not found?**
-
+**Homebrew not found?**
 ```bash
 # Apple Silicon
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -617,123 +294,101 @@ eval "$(/usr/local/bin/brew shellenv)"
 ```
 
 **Permission errors?**
-
 ```bash
-sudo chown -R $(whoami) /opt/homebrew/*  # Apple Silicon
+sudo chown -R $(whoami) /opt/homebrew/*
 ```
 
 ### Linux
 
 **fnm not found?**
-
 ```bash
 source ~/.bashrc  # or ~/.zshrc
 fnm install --lts
 ```
 
 **Docker permission denied?**
-
 ```bash
 sudo usermod -aG docker $USER
 # Log out and log back in
 ```
 
-**Zsh not default shell?**
+### General
 
+**Command not found after install?**
 ```bash
-chsh -s $(which zsh)
+# Restart your terminal or:
+source ~/.zshrc  # or ~/.bashrc
 ```
 
-### Windows
-
-**Script execution error?**
-
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force
-```
-
-**Winget not found?**
-
-- Install "App Installer" from Microsoft Store
-- Or download from: <https://aka.ms/getwinget>
-
-**fnm not found after install?**
-
-```powershell
-# Refresh PATH
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
-```
-
-**Need admin rights?**
-
-- Right-click PowerShell → "Run as Administrator"
-
-### Universal
-
-**Git clone fails (SSH)?**
-
+**Want to start over?**
 ```bash
-# Use HTTPS instead
-DOTFILES_REPO_URL="https://github.com/username/dotfiles.git"
+make reset-selection
+make select
+make install
 ```
-
-**Want to start fresh?**
-
-```bash
-# macOS: Remove Homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
-
-# Linux: Remove packages via your package manager
-# Windows: Uninstall via Apps & Features
-
-# Then re-run bootstrap
-```
-
-## 🎯 Why This Setup?
-
-- **🚀 Fast**: fnm loads instantly (nvm can add 1-2s to shell startup)
-- **🔧 Automated**: One command sets up everything
-- **🌍 Cross-platform**: Works on macOS, Linux, and Windows
-- **📦 Reproducible**: Same setup on any machine
-- **🔄 Version controlled**: Track your environment changes
-- **🎨 Sensible defaults**: Platform-specific tweaks for developers
-- **🧹 Clean**: No bloat, only what you need
-- **🔀 Flexible**: Easy to customize per platform
-
-## 🤝 Contributing
-
-This is a personal setup, but feel free to fork and customize for your needs!
-
-## 📄 License
-
-MIT
-
-## 🔗 Resources
-
-**Package Managers:**
-
-- [Homebrew](https://brew.sh) (macOS)
-- [Winget](https://aka.ms/getwinget) (Windows)
-- [Chocolatey](https://chocolatey.org) (Windows)
-
-**Development Tools:**
-
-- [fnm](https://github.com/Schniz/fnm) - Fast Node Manager
-- [oh-my-zsh](https://ohmyz.sh) - Zsh framework
-- [Starship](https://starship.rs) - Cross-platform prompt
-
-**Platform-Specific:**
-
-- [Raycast](https://raycast.com) - macOS launcher
-- [PowerToys](https://aka.ms/powertoys) - Windows utilities
-- [Windows Terminal](https://aka.ms/terminal) - Modern terminal for Windows
 
 ---
 
-**Enjoy your new dev setup on any platform!** 🎉
+## 🧹 Cleanup
 
-For platform-specific package management, see the README in each platform folder:
+### After Installation
 
-- [macOS Setup Guide](macos/README.md)
-- [Linux Setup Guide](linux/README.md)
-- [Windows Setup Guide](windows/README.md)
+```bash
+# Optional: Delete the repo
+cd ~ && rm -rf ~/.dev-setup
+
+# Packages remain installed and working
+```
+
+### Keep for Updates
+
+```bash
+# Keep repo and update later
+cd ~/.dev-setup
+make update
+```
+
+---
+
+## 📚 Documentation
+
+- **[USAGE.md](docs/USAGE.md)** - Complete usage guide
+- **[PACKAGE-SELECTION.md](docs/PACKAGE-SELECTION.md)** - Package control guide
+- **[STRUCTURE.md](STRUCTURE.md)** - Project structure
+- **Platform READMEs** - Platform-specific docs
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Test on your platform
+4. Submit a pull request
+
+---
+
+## 📄 License
+
+MIT License - See [LICENSE](LICENSE) file
+
+---
+
+## ⭐ Star this repo if it helped you!
+
+**Happy coding!** 🚀
+
+---
+
+## 💡 Tips
+
+- Run `make select` first to customize packages
+- Use `make dry-run` to preview before installing
+- Update regularly with `make update`
+- Check system health: test all commands work
+- Customize package files for your needs
+- Keep the repo for easy updates
+
+---
+
+**Simple. Fast. Cross-platform.** ✨

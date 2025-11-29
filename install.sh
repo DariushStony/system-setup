@@ -27,45 +27,20 @@ else
     git clone "$REPO_URL" "$INSTALL_DIR"
 fi
 
-# Choose installation method
+# Run bootstrap
 cd "$INSTALL_DIR"
 echo ""
-echo "╔════════════════════════════════════════╗"
-echo "║     Choose Installation Method         ║"
-echo "╚════════════════════════════════════════╝"
+echo "🚀 Starting installation..."
 echo ""
-echo "1) Quick setup (one-time, no CLI install)"
-echo "   → Installs packages now, you can delete repo after"
-echo ""
-echo "2) Install CLI tool + packages"
-echo "   → Adds 'dev-setup' command for future updates"
-echo ""
-read -p "Choice [1/2, default=1]: " choice
-choice=${choice:-1}
+chmod +x lib/bootstrap.sh
+./lib/bootstrap.sh "$@"
 
-case $choice in
-    2)
-        echo ""
-        echo "📦 Installing CLI tool..."
-        chmod +x scripts/install-cli.sh
-        ./scripts/install-cli.sh
-        echo ""
-        echo "✅ Now run: dev-setup install"
-        ;;
-    *)
-        echo ""
-        echo "🚀 Running quick setup (one-time)..."
-        echo ""
-        chmod +x lib/bootstrap.sh
-        ./lib/bootstrap.sh "$@"
-        echo ""
-        echo "✅ Setup complete!"
-        echo ""
-        echo "💡 Tip: You can delete this repo now if you want:"
-        echo "   rm -rf $INSTALL_DIR"
-        echo ""
-        echo "💡 Or keep it for future updates:"
-        echo "   cd $INSTALL_DIR && make update"
-        ;;
-esac
-
+echo ""
+echo "✅ Setup complete!"
+echo ""
+echo "💡 You can delete this repo now if you want:"
+echo "   rm -rf $INSTALL_DIR"
+echo ""
+echo "💡 Or keep it for future updates:"
+echo "   cd $INSTALL_DIR && make update"
+echo ""
