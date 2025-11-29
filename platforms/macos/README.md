@@ -51,16 +51,19 @@ cask "font-name"
 ### How to Customize
 
 **Add a CLI tool:**
+
 ```ruby
 brew "your-tool"
 ```
 
 **Add a GUI app:**
+
 ```ruby
 cask "your-app"
 ```
 
 **Comment out packages you don't want:**
+
 ```ruby
 # brew "unwanted-package"
 ```
@@ -118,4 +121,3 @@ Many useful packages are commented out in the Brewfile. Review and uncomment wha
 - `gh` - GitHub CLI
 - `pnpm`, `yarn` - Alternative Node package managers
 - `kubernetes-cli`, `helm` - Kubernetes tools
-

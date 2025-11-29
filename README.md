@@ -20,9 +20,29 @@ dev-setup install
 
 ## 🚀 Quick Start
 
-### ⭐ Recommended: CLI Tool (Easiest)
+### ⭐ One-Time Setup (Simplest - No CLI Install)
 
-Install the `dev-setup` CLI tool to use from anywhere on your system:
+For one-time machine setup, just run directly:
+
+```bash
+# Option 1: Remote install (easiest)
+curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
+# ✅ Done! Packages installed, no CLI needed
+
+# Option 2: Local install
+git clone <your-repo-url> ~/dev-setup
+cd ~/dev-setup
+make install
+# ✅ Done! Can delete repo after if you want
+```
+
+**Use this if:** Setting up a new machine once, don't need ongoing management.
+
+---
+
+### 🔄 Install CLI Tool (For Ongoing Use)
+
+If you'll **update packages regularly** or **manage multiple machines**:
 
 ```bash
 # Clone and install CLI
@@ -34,29 +54,12 @@ cd ~/dev-setup
 dev-setup select         # Choose packages
 dev-setup install        # Install
 dev-setup update         # Update later
+dev-setup doctor         # Check health
 ```
+
+**Use this if:** You want easy updates, troubleshooting tools, or manage multiple systems.
 
 📖 **See [docs/CLI-GUIDE.md](docs/CLI-GUIDE.md) for complete CLI documentation**
-
-### Option 2: Direct Script Execution
-
-```bash
-# Clone the repo
-git clone <your-repo-url> ~/dev-setup
-cd ~/dev-setup
-
-# Choose packages
-make select
-
-# Install
-make install
-```
-
-### Option 3: One-Line Remote Install
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
-```
 
 ### Option 4: Platform-Specific Scripts
 
