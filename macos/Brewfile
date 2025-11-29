@@ -1,0 +1,166 @@
+########################################
+# Taps
+########################################
+
+tap "homebrew/core"
+tap "homebrew/cask"
+tap "homebrew/cask-fonts"
+
+########################################
+# CLI Tools (Essentials)
+########################################
+
+brew "git"
+brew "wget"
+brew "tree"
+brew "htop"
+# brew "fzf"
+# brew "ripgrep"
+# brew "fd"
+# brew "jq"
+# brew "eza"          # modern ls replacement
+brew "tmux"
+# brew "gh"           # GitHub CLI
+# brew "mas"          # App Store CLI (optional)
+
+########################################
+# Programming Languages / Runtimes
+########################################
+
+# ⚠️ Best practice: use fnm instead of nvm (way faster + no shell slowdown)
+brew "fnm"
+
+# Node binary (optional: fnm handles it)
+# brew "node"
+
+brew "go"
+brew "python@3.14"
+
+########################################
+# Package Managers / Build Tools
+########################################
+
+# brew "pnpm"
+# brew "yarn"
+# brew "ninja"
+# brew "cmake"
+
+########################################
+# Networking & HTTP Tools
+########################################
+
+brew "httpie"
+brew "curl"
+# brew "ngrok"
+# brew "openssl@3"
+
+########################################
+# Containers / DevOps
+########################################
+
+# brew "docker"
+brew "docker-compose"
+# brew "kubernetes-cli"   # kubectl
+# brew "kubectx"          # for switching clusters fast
+# brew "helm"             # package manager for k8s
+
+########################################
+# Zsh Plugins & Terminal Experience
+########################################
+
+brew "zsh"
+brew "zplug"
+brew "pure"
+brew "zsh-async"
+brew "starship"
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zsh-completions"
+# brew "zoxide"             # smart cd command
+# brew "bat"                # modern cat
+# brew "tldr"
+
+########################################
+# Git / Commit Tools
+########################################
+
+# brew "git-lfs"
+brew "commitlint"
+brew "conventional-commits"
+
+########################################
+# Fun CLI Tools (optional)
+########################################
+
+brew "figlet"
+brew "lolcat"
+brew "toilet"
+brew "qrencode"
+
+# Documentation & conversion
+brew "pandoc"
+
+########################################
+# GUI Applications (Casks)
+########################################
+
+# Window Management
+cask "raycast"
+cask "rectangle"
+cask "alttab"
+
+# Browsers
+cask "arc"
+cask "google-chrome"
+cask "firefox"
+cask "microsoft-edge"
+
+# Code Editors & Terminals
+cask "cursor"
+cask "visual-studio-code"
+cask "warp"
+cask "iterm2"
+# Dev Tools
+cask "docker"
+cask "postman"
+cask "proxyman"
+cask "httpie"
+
+# AI
+cask "chatgpt"
+
+# Design & Creativity
+cask "figma"
+cask "excalidraw"
+cask "obsidian"
+
+# Communication
+cask "slack"
+cask "microsoft-teams"
+
+# Media
+cask "spotify"
+cask "vlc"
+
+# Utilities
+cask "the-unarchiver"
+cask "free-download-manager"
+
+# VPN & Security
+cask "windscribe"
+cask "cisco-secure-client"
+
+########################################
+# Fonts (Developer fonts)
+########################################
+
+cask "font-jetbrains-mono"
+cask "font-fira-code"
+cask "font-cascadia-code"
+
+########################################
+# Notes
+########################################
+# Some apps are NOT available on Homebrew:
+# - X-VPN
+# - Furious GUI
