@@ -13,7 +13,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VERSION="1.0.0"
 
 # Config file
-CONFIG_FILE="$HOME/.dev-setup-config"
+CONFIG_FILE="$HOME/.system-setup-config"
 
 # Modes
 MODE="standard"  # minimal, standard, full
@@ -69,7 +69,7 @@ EXAMPLES:
   ./bootstrap.sh --use-config # Use saved config
 
 MORE INFO:
-  https://github.com/username/dev-setup
+  https://github.com/DariushStony/system-setup
 
 EOF
   exit 0

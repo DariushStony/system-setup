@@ -64,7 +64,7 @@ test:
 
 clean:
 	@echo "🧹 Cleaning up..."
-	@rm -f .dev-setup-config.tmp
+	@rm -f .system-setup-config.tmp
 	@rm -f .package-categories.backup
 	@echo "Done!"
 

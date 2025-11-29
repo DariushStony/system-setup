@@ -17,7 +17,7 @@ One command to install everything: package managers, development tools, applicat
 ### Method 1: One-Line Remote Install (Easiest)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DariushStony/system-setup/main/install.sh | bash
 ```
 
 **That's it!** The installer will:
@@ -34,8 +34,8 @@ curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh 
 
 ```bash
 # Clone
-git clone <your-repo-url> ~/dev-setup
-cd ~/dev-setup
+git clone https://github.com/DariushStony/system-setup ~/system-setup
+cd ~/system-setup
 
 # Choose packages (recommended)
 make select
@@ -53,21 +53,21 @@ make install
 **macOS:**
 
 ```bash
-cd ~/dev-setup/platforms/macos
+cd ~/system-setup/platforms/macos
 ./bootstrap.sh
 ```
 
 **Linux:**
 
 ```bash
-cd ~/dev-setup/platforms/linux
+cd ~/system-setup/platforms/linux
 ./bootstrap.sh
 ```
 
 **Windows (PowerShell as Administrator):**
 
 ```powershell
-cd ~/dev-setup/platforms/windows
+cd ~/system-setup/platforms/windows
 .\bootstrap.ps1
 ```
 
@@ -193,7 +193,7 @@ make test                   # Test scripts
 ## 📁 Project Structure
 
 ```
-dev-setup/
+system-setup/
 ├── lib/                    # Core scripts
 │   ├── bootstrap.sh       # Universal launcher
 │   ├── select-packages.sh # Package selection
@@ -261,7 +261,7 @@ The bootstrap will ask for:
 
 ### Saved Configuration
 
-Your preferences are saved to `~/.dev-setup-config` for faster re-runs:
+Your preferences are saved to `~/.system-setup-config` for faster re-runs:
 
 ```bash
 ./lib/bootstrap.sh --use-config  # Skip prompts
@@ -385,7 +385,7 @@ make install
 
 ```bash
 # Optional: Delete the repo
-cd ~ && rm -rf ~/.dev-setup
+cd ~ && rm -rf ~/.system-setup
 
 # Packages remain installed and working
 ```
@@ -394,7 +394,7 @@ cd ~ && rm -rf ~/.dev-setup
 
 ```bash
 # Keep repo and update later
-cd ~/.dev-setup
+cd ~/.system-setup
 make update
 ```
 

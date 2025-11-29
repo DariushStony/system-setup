@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # One-line remote installer
-# Usage: curl -fsSL https://raw.githubusercontent.com/username/repo/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/DariushStony/system-setup/main/install.sh | bash
 
 set -e
 
-REPO_URL="https://github.com/username/dev-setup"
-INSTALL_DIR="$HOME/.dev-setup"
+REPO_URL="https://github.com/DariushStony/system-setup"
+INSTALL_DIR="$HOME/.system-setup"
 
 echo "╔════════════════════════════════════════╗"
 echo "║   Development Environment Installer    ║"

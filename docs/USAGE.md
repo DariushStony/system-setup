@@ -9,10 +9,11 @@ Quick reference for all the ways to use this setup.
 ### One-Line Install (Recommended)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/DariushStony/system-setup/main/install.sh | bash
 ```
 
 **What happens:**
+
 1. Script detects your OS
 2. **Prompts you to select packages** (interactive/preset/all)
 3. Installs only what you selected
@@ -20,8 +21,8 @@ curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh 
 ### Manual Install
 
 ```bash
-git clone https://github.com/username/dev-setup.git
-cd dev-setup
+git clone https://github.com/DariushStony/system-setup.git
+cd system-setup
 ./lib/bootstrap.sh
 ```
 
@@ -49,16 +50,19 @@ What would you like to do? [1/2/3]
 ```
 
 **Option 1 - Interactive Selection:**
+
 - Walks through each package category
 - You choose Yes/No for each
 - Most control
 
 **Option 2 - Preset Selection:**
+
 - Minimal: Essentials only (~5 min, ~1 GB)
 - Developer: Recommended (~15 min, ~5 GB)
 - Full: Everything (~25 min, ~6 GB)
 
 **Option 3 - Install All:**
+
 - Installs everything without filtering
 - Not recommended for most users
 
@@ -177,10 +181,10 @@ make update
 
 ## 📝 Configuration File
 
-The bootstrap saves your configuration to `~/.dev-setup-config`:
+The bootstrap saves your configuration to `~/.system-setup-config`:
 
 ```bash
-# Example ~/.dev-setup-config
+# Example ~/.system-setup-config
 GIT_NAME="John Doe"
 GIT_EMAIL="john@example.com"
 DOTFILES_REPO="git@github.com:username/dotfiles.git"
@@ -298,14 +302,14 @@ sudo chown -R $USER /usr/local
 ### Reset Configuration
 
 ```bash
-rm ~/.dev-setup-config
+rm ~/.system-setup-config
 ./bootstrap.sh
 ```
 
 ### Force Update
 
 ```bash
-cd dev-setup
+cd system-setup
 git pull --force
 ./bootstrap.sh
 ```
@@ -337,7 +341,7 @@ curl -fsSL https://url/install.sh | bash
 ### Re-run or Update Existing Setup
 
 ```bash
-cd ~/dev-setup
+cd ~/system-setup
 make install
 # 1. Shows current selection
 # 2. Asks if you want to modify [y/N]
@@ -347,7 +351,7 @@ make install
 ### Select Packages Before Installing
 
 ```bash
-cd ~/dev-setup
+cd ~/system-setup
 make select          # Choose packages first
 make dry-run         # Preview what will be installed
 make install         # Install
@@ -356,7 +360,7 @@ make install         # Install
 ### Change Package Selection Later
 
 ```bash
-cd ~/dev-setup
+cd ~/system-setup
 make select          # Re-select packages
 make install         # Install newly selected packages
 ```
