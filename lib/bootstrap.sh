@@ -129,7 +129,7 @@ check_package_selection() {
     echo ""
     # Show current selection briefly
     if [ -f "$SCRIPT_DIR/lib/select-packages.sh" ]; then
-      "$SCRIPT_DIR/lib/select-packages.sh" --show 2>/dev/null || true
+      (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh" --show) 2>/dev/null || true
     fi
     echo ""
     read -p "Do you want to modify your package selection? [y/N] " answer
@@ -137,7 +137,7 @@ check_package_selection() {
     case $answer in
       [Yy]* )
         log "Opening package selection..."
-        "$SCRIPT_DIR/lib/select-packages.sh"
+        (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh")
         ;;
       * )
         log "Continuing with current selection..."
@@ -159,7 +159,7 @@ check_package_selection() {
     case $choice in
       1)
         log "Opening interactive package selection..."
-        "$SCRIPT_DIR/lib/select-packages.sh"
+        (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh")
         ;;
       2)
         echo ""
@@ -174,19 +174,19 @@ check_package_selection() {
         case $preset in
           1)
             log "Applying minimal preset..."
-            "$SCRIPT_DIR/lib/select-packages.sh" --minimal
+            (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh" --minimal)
             ;;
           2)
             log "Applying developer preset..."
-            "$SCRIPT_DIR/lib/select-packages.sh" --developer
+            (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh" --developer)
             ;;
           3)
             log "Applying full preset..."
-            "$SCRIPT_DIR/lib/select-packages.sh" --full
+            (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh" --full)
             ;;
           *)
             log "Invalid preset, using developer preset..."
-            "$SCRIPT_DIR/lib/select-packages.sh" --developer
+            (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh" --developer)
             ;;
         esac
         ;;
@@ -212,7 +212,7 @@ EOF
         ;;
       *)
         log "Invalid choice, opening interactive selection..."
-        "$SCRIPT_DIR/lib/select-packages.sh"
+        (cd "$SCRIPT_DIR" && "$SCRIPT_DIR/lib/select-packages.sh")
         ;;
     esac
   fi
