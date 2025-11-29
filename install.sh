@@ -27,11 +27,31 @@ else
     git clone "$REPO_URL" "$INSTALL_DIR"
 fi
 
-# Run bootstrap
+# Option 1: Install CLI tool (recommended)
 cd "$INSTALL_DIR"
-chmod +x bootstrap.sh
 echo ""
-echo "🚀 Starting bootstrap..."
+echo "Choose installation method:"
+echo "  1) Install CLI tool (recommended - use 'dev-setup' command anywhere)"
+echo "  2) Run bootstrap directly"
 echo ""
-./bootstrap.sh "$@"
+read -p "Choice [1/2]: " choice
+
+case $choice in
+    2)
+        echo ""
+        echo "🚀 Running bootstrap directly..."
+        echo ""
+        chmod +x lib/bootstrap.sh
+        ./lib/bootstrap.sh "$@"
+        ;;
+    *)
+        echo ""
+        echo "📦 Installing CLI tool..."
+        echo ""
+        chmod +x scripts/install-cli.sh
+        ./scripts/install-cli.sh
+        echo ""
+        echo "✅ CLI installed! Now run: dev-setup install"
+        ;;
+esac
 

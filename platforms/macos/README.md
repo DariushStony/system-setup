@@ -69,16 +69,16 @@ cask "your-app"
 
 ```bash
 # Test Brewfile
-brew bundle check --file=macos/Brewfile
+brew bundle check --file=Brewfile
 
 # Install from Brewfile
-brew bundle --file=macos/Brewfile
+brew bundle --file=Brewfile
 
 # Generate Brewfile from installed packages
-brew bundle dump --file=macos/Brewfile --force
+brew bundle dump --file=Brewfile --force
 
 # Cleanup packages not in Brewfile
-brew bundle cleanup --file=macos/Brewfile
+brew bundle cleanup --file=Brewfile
 ```
 
 ### Package Categories
