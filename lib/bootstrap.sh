@@ -6,6 +6,9 @@ set -euo pipefail
 # Detects OS and runs appropriate setup
 ########################################
 
+# Get script directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
 # Version
 VERSION="1.0.0"
 
@@ -121,19 +124,19 @@ parse_args() {
 ########################################
 
 check_package_selection() {
-  if [ -f ".package-categories" ]; then
+  if [ -f "$SCRIPT_DIR/.package-categories" ]; then
     log "Using package selection from .package-categories"
   else
     log "No package selection found. Using defaults (all enabled)"
     echo ""
-    warn "💡 Tip: Run './select-packages.sh' or 'make select' to choose packages"
+    warn "💡 Tip: Run 'dev-setup select' or 'make select' to choose packages"
     echo ""
     read -p "Continue with all packages? [Y/n] " answer
     answer=${answer:-Y}
     case $answer in
       [Nn]* )
         log "Running package selection..."
-        ./select-packages.sh
+        "$SCRIPT_DIR/lib/select-packages.sh"
         ;;
       * )
         log "Continuing with all packages..."
@@ -181,35 +184,38 @@ run_bootstrap() {
   
   case "$OS" in
     macos)
-      if [ ! -f "./macos/bootstrap.sh" ]; then
-        error "macos/bootstrap.sh not found!"
+      PLATFORM_SCRIPT="$SCRIPT_DIR/platforms/macos/bootstrap.sh"
+      if [ ! -f "$PLATFORM_SCRIPT" ]; then
+        error "Platform script not found: $PLATFORM_SCRIPT"
       fi
       log "Running macOS bootstrap..."
-      chmod +x macos/bootstrap.sh
+      chmod +x "$PLATFORM_SCRIPT"
       if [ "$DRY_RUN" = true ]; then
-        log "Would execute: ./macos/bootstrap.sh $FLAGS"
+        log "Would execute: $PLATFORM_SCRIPT $FLAGS"
       else
-        ./macos/bootstrap.sh $FLAGS
+        "$PLATFORM_SCRIPT" $FLAGS
       fi
       ;;
     
     linux)
-      if [ ! -f "./linux/bootstrap.sh" ]; then
-        error "linux/bootstrap.sh not found!"
+      PLATFORM_SCRIPT="$SCRIPT_DIR/platforms/linux/bootstrap.sh"
+      if [ ! -f "$PLATFORM_SCRIPT" ]; then
+        error "Platform script not found: $PLATFORM_SCRIPT"
       fi
       log "Running Linux bootstrap..."
-      chmod +x linux/bootstrap.sh
+      chmod +x "$PLATFORM_SCRIPT"
       if [ "$DRY_RUN" = true ]; then
-        log "Would execute: ./linux/bootstrap.sh $FLAGS"
+        log "Would execute: $PLATFORM_SCRIPT $FLAGS"
       else
-        ./linux/bootstrap.sh $FLAGS
+        "$PLATFORM_SCRIPT" $FLAGS
       fi
       ;;
     
     windows)
+      PLATFORM_SCRIPT="$SCRIPT_DIR/platforms/windows/bootstrap.ps1"
       warn "For Windows, please run the PowerShell script directly:"
       warn "  Set-ExecutionPolicy Bypass -Scope Process -Force"
-      warn "  .\\windows\\bootstrap.ps1 $FLAGS"
+      warn "  powershell.exe -ExecutionPolicy Bypass -File $PLATFORM_SCRIPT $FLAGS"
       exit 0
       ;;
     

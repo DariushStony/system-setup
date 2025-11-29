@@ -13,6 +13,7 @@ make select
 ```
 
 You'll see a menu:
+
 ```
 ╔════════════════════════════════════════╗
 ║     Package Selection Tool             ║
@@ -49,61 +50,73 @@ vim .package-categories
 ## 📋 Package Categories
 
 ### Essential Tools ⭐ (Recommended: Yes)
+
 **What:** git, curl, wget, tree, htop
 **Why:** Core tools needed for everything
 **Size:** ~50 MB
 
 ### Programming Languages ⭐ (Recommended: Yes)
+
 **What:** Node.js (fnm), Go, Python
 **Why:** Runtime environments for development
 **Size:** ~500 MB
 
 ### Development Tools (Recommended: Yes)
+
 **What:** Docker, Postman, Proxyman, HTTPie
 **Why:** Essential for API and container development
 **Size:** ~2 GB (Docker is large)
 
 ### Browsers (Recommended: Partial)
+
 **What:** Chrome, Firefox, Arc, Edge
 **Why:** Testing and browsing
 **Size:** ~500 MB per browser
 
 ### Editors & IDEs ⭐ (Recommended: Yes)
+
 **What:** VS Code, Cursor, WebStorm
 **Why:** Code editors you'll use daily
 **Size:** ~500 MB per editor
 
 ### Communication (Recommended: Depends on workflow)
+
 **What:** Slack, Microsoft Teams
 **Why:** Team communication
 **Size:** ~300 MB per app
 
 ### Productivity (Recommended: Optional)
+
 **What:** Figma, Obsidian, Excalidraw
 **Why:** Design and note-taking
 **Size:** ~200 MB per app
 
 ### Media (Recommended: Optional)
+
 **What:** Spotify, VLC
 **Why:** Music and video playback
 **Size:** ~300 MB
 
 ### Window Managers ⭐ (Recommended: Yes on macOS)
+
 **What:** Rectangle, Raycast, AltTab
 **Why:** Essential for productivity on macOS
 **Size:** ~50 MB
 
 ### Developer Fonts (Recommended: Yes)
+
 **What:** JetBrains Mono, Fira Code, Cascadia Code
 **Why:** Better code readability
 **Size:** ~10 MB
 
 ### Zsh Plugins ⭐ (Recommended: Yes)
+
 **What:** Autosuggestions, syntax highlighting, pure theme
 **Why:** Better terminal experience
 **Size:** ~5 MB
 
 ### Optional/Fun Tools (Recommended: No)
+
 **What:** figlet, lolcat, toilet, qrencode
 **Why:** Fun CLI tools for ASCII art
 **Size:** ~10 MB
@@ -113,6 +126,7 @@ vim .package-categories
 ## 🎨 Presets Explained
 
 ### Minimal (⚡ Fast - 5 min)
+
 - ✅ Essential tools
 - ✅ Programming languages
 - ✅ Editors & IDEs
@@ -124,6 +138,7 @@ vim .package-categories
 **Total size:** ~1 GB
 
 ### Developer (⭐ Recommended - 15 min)
+
 - ✅ Everything from Minimal
 - ✅ Development tools
 - ✅ Browsers
@@ -138,6 +153,7 @@ vim .package-categories
 **Total size:** ~5 GB
 
 ### Full (📦 Everything - 25 min)
+
 - ✅ Everything enabled
 
 **Perfect for:** Power users, want it all
@@ -219,6 +235,7 @@ INSTALL_OPTIONAL=false
 ```
 
 **Edit manually:**
+
 ```bash
 vim .package-categories
 # Change true/false values
@@ -254,12 +271,15 @@ make select             # Choose again
 ## 🎯 Platform-Specific Behavior
 
 ### macOS
+
 All categories available via Homebrew.
 
 ### Linux
+
 Some GUI apps may not be available (depends on distribution).
 
 ### Windows
+
 Uses Winget + Chocolatey packages.
 
 ---
@@ -286,6 +306,7 @@ Uses Winget + Chocolatey packages.
 ## 💡 Tips
 
 ### 1. Start Minimal, Add Later
+
 ```bash
 # Install essentials first
 ./select-packages.sh --minimal
@@ -299,6 +320,7 @@ make install   # Install newly selected
 ### 2. Different Setups for Different Machines
 
 **Work laptop:**
+
 ```bash
 ./select-packages.sh --developer
 # Enable: Communication, Productivity
@@ -306,6 +328,7 @@ make install
 ```
 
 **Personal laptop:**
+
 ```bash
 ./select-packages.sh --full
 # Everything!
@@ -313,6 +336,7 @@ make install
 ```
 
 **Server:**
+
 ```bash
 ./select-packages.sh --minimal
 # CLI tools only
@@ -322,6 +346,7 @@ make install
 ### 3. Save Disk Space
 
 Disable what you don't need:
+
 ```bash
 make select
 # Disable: Media, Optional, Browsers (if you only use one)
@@ -372,4 +397,3 @@ cat .package-categories
 **Now you have complete control over your setup!** 🎮
 
 Users can install only what they need, saving time and disk space.
-

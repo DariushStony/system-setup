@@ -1,8 +1,16 @@
-# 🚀 Cross-Platform Development Setup
+# 🚀 dev-setup - Cross-Platform Development Environment CLI
 
-Automated development environment setup for **macOS**, **Linux**, and **Windows**.
+Professional CLI tool for automated development environment setup on **macOS**, **Linux**, and **Windows**.
 
 One command to set up your entire dev environment with package managers, dotfiles, and sensible defaults.
+
+```bash
+# Install CLI tool
+./install-cli.sh
+
+# Use anywhere
+dev-setup install
+```
 
 ## 🖥️ Supported Platforms
 
@@ -12,55 +20,64 @@ One command to set up your entire dev environment with package managers, dotfile
 
 ## 🚀 Quick Start
 
-### One-Line Install (Easiest)
+### ⭐ Recommended: CLI Tool (Easiest)
+
+Install the `dev-setup` CLI tool to use from anywhere on your system:
+
+```bash
+# Clone and install CLI
+git clone <your-repo-url> ~/dev-setup
+cd ~/dev-setup
+./scripts/install-cli.sh
+
+# Now use from anywhere!
+dev-setup select         # Choose packages
+dev-setup install        # Install
+dev-setup update         # Update later
+```
+
+📖 **See [docs/CLI-GUIDE.md](docs/CLI-GUIDE.md) for complete CLI documentation**
+
+### Option 2: Direct Script Execution
+
+```bash
+# Clone the repo
+git clone <your-repo-url> ~/dev-setup
+cd ~/dev-setup
+
+# Choose packages
+make select
+
+# Install
+make install
+```
+
+### Option 3: One-Line Remote Install
 
 ```bash
 curl -fsSL https://raw.githubusercontent.com/username/dev-setup/main/install.sh | bash
 ```
 
-### Standard Install
-
-```bash
-# Clone this repo
-git clone <your-repo-url> ~/dev-setup
-cd ~/dev-setup
-
-# Run the universal bootstrap
-chmod +x bootstrap.sh
-./bootstrap.sh
-```
-
-### Using Make (If Available)
-
-```bash
-make install        # Standard installation
-make install-min    # Minimal installation
-make install-full   # Full installation
-```
-
-### Platform-Specific
+### Option 4: Platform-Specific Scripts
 
 **macOS:**
 
 ```bash
-cd macos
-chmod +x bootstrap.sh
+cd ~/dev-setup/macos
 ./bootstrap.sh
 ```
 
 **Linux:**
 
 ```bash
-cd linux
-chmod +x bootstrap.sh
+cd ~/dev-setup/linux
 ./bootstrap.sh
 ```
 
 **Windows (PowerShell as Administrator):**
 
 ```powershell
-cd windows
-Set-ExecutionPolicy Bypass -Scope Process -Force
+cd ~/dev-setup/windows
 .\bootstrap.ps1
 ```
 
@@ -73,12 +90,14 @@ Set-ExecutionPolicy Bypass -Scope Process -Force
 ### 🎯 Choose What to Install
 
 **Interactive selection - pick categories:**
+
 ```bash
 make select                     # Interactive menu
 ./select-packages.sh            # Or run directly
 ```
 
 **Quick presets:**
+
 ```bash
 ./select-packages.sh --minimal      # Essentials only
 ./select-packages.sh --developer    # Recommended for devs  
@@ -87,6 +106,7 @@ make select                     # Interactive menu
 ```
 
 **Package categories:**
+
 - Essential tools, Programming languages, Dev tools
 - Browsers, Editors, Communication apps
 - Productivity, Media, Window managers
@@ -95,12 +115,14 @@ make select                     # Interactive menu
 ### 🎯 Choose What to Install (NEW!)
 
 **Interactive selection:**
+
 ```bash
 make select                         # Choose categories interactively
 ./select-packages.sh               # Interactive menu
 ```
 
 **Quick presets:**
+
 ```bash
 ./select-packages.sh --minimal      # Essentials only (~1 GB)
 ./select-packages.sh --developer    # Recommended (~5 GB)
@@ -109,7 +131,7 @@ make select                         # Choose categories interactively
 
 **Package categories:** Essential tools, Languages, Dev tools, Browsers, Editors, Communication, Productivity, Media, Window managers, Fonts, Zsh plugins, Optional
 
-📖 **See [PACKAGE-SELECTION.md](PACKAGE-SELECTION.md) for complete guide**
+📖 **See [docs/PACKAGE-SELECTION.md](docs/PACKAGE-SELECTION.md) for complete guide**
 
 ### Installation Modes
 
@@ -149,13 +171,14 @@ make check                  # Check package status
 make test                   # Test scripts
 ```
 
-📖 **See [USAGE.md](USAGE.md) for complete guide**
+📖 **See [docs/USAGE.md](docs/USAGE.md) for complete guide**
 
 ---
 
 ## 🎮 Typical Workflows
 
 ### Full Control (Recommended)
+
 ```bash
 make select                 # 1. Choose what to install
 make dry-run                # 2. Preview
@@ -164,15 +187,45 @@ make update                 # 4. Update later
 ```
 
 ### Quick Start
+
 ```bash
 make install                # Uses defaults, prompts to customize
 ```
 
 ### Minimal Setup
+
 ```bash
 ./select-packages.sh --minimal    # Apply minimal preset
 make install                      # Install only essentials
 ```
+
+---
+
+## 📁 Project Structure
+
+Clean, professional directory organization:
+
+```
+dev-setup/
+├── bin/                    # CLI executable
+│   └── dev-setup
+├── lib/                    # Core scripts
+│   ├── bootstrap.sh
+│   ├── select-packages.sh
+│   └── update.sh
+├── platforms/              # Platform-specific code
+│   ├── macos/
+│   ├── linux/
+│   └── windows/
+├── completions/            # Shell completions
+├── docs/                   # Documentation
+├── scripts/                # Utilities
+└── README.md, LICENSE, Makefile
+```
+
+📖 **See [STRUCTURE.md](STRUCTURE.md) for detailed structure documentation**
+
+---
 
 ## 📦 What Gets Installed
 
