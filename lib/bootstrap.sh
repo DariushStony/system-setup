@@ -318,6 +318,30 @@ main() {
     check_package_selection
   fi
   
+  # Confirm before proceeding
+  echo ""
+  echo "════════════════════════════════════════"
+  if [ "$DRY_RUN" = true ]; then
+    echo "Ready to preview installation (dry-run mode)"
+  else
+    warn "⚠️  This will modify your system by installing packages and configuring settings."
+  fi
+  echo "════════════════════════════════════════"
+  echo ""
+  read -p "Do you want to proceed? [y/N] " proceed
+  proceed=${proceed:-N}
+  case $proceed in
+    [Yy]* )
+      log "Starting installation..."
+      ;;
+    * )
+      log "Installation cancelled by user."
+      echo ""
+      exit 0
+      ;;
+  esac
+  echo ""
+  
   run_bootstrap
   
   if [ "$DRY_RUN" = false ]; then
